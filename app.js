@@ -27,10 +27,17 @@ app.get('/api/user/:username', (req, res) => {
     if (!user) {
         return res.status(400).send({'error':'User not found'});
     }
-    const photos = Photo.getAllByUser(req.params.username);
+    let photos = Photo.getAllByUser(req.params.username);
+    let expand;
+    if (req.query.expand) {
+        expand = req.query.expand.split(',');
+    }
+    if (!expand || expand.indexOf('photos') === -1) {
+        photos = photos.map(photo => photo.id);
+    }
     res.send({
         ...user,
-        photos: photos.map(photo => photo.id)
+        photos: photos
     });
 });
 
