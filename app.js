@@ -59,6 +59,9 @@ app.post('/api/photo/', upload.single('photo'), (req, res) => {
     if (result.error) {
         return res.status(400).send({'error': result.error.details[0].message});
     }
+    if (!req.file) {
+        return res.status(400).send({'error': 'Photo required'});
+    }
     if (!User.get(req.body.username)) {
         fs.unlink(req.file.path, (err) => {
             if (!err) {
