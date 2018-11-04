@@ -79,4 +79,21 @@ app.get('/api/photo/:id', (req, res) => {
     res.send(photo);
 });
 
+app.get('/api/login/', (req, res) => {
+    if (!req.headers.authorization) {
+        return res.status(401).send();
+    }
+    if (req.headers.authorization.indexOf('Basic ') === -1) {
+        return res.status(401).send();
+    }
+    const token = req.headers.authorization.substring(6);
+    const plainToken = Buffer.from(token, 'base64').toString();
+    const colonIndex = plainToken.indexOf(':');
+    const username = plainToken.substring(0, colonIndex);
+    const password = plainToken.substring(colonIndex+1);
+    const apiKey = User.signIn(username, password);
+
+    res.send({'key': apiKey});
+});
+
 app.listen(port);
