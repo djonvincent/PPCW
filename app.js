@@ -4,6 +4,7 @@ const Joi = require('joi');
 const multer = require('multer');
 const User = require('./models/user');
 const Photo = require('./models/photo');
+const auth = require('./middlewares/auth');
 const app = express();
 const port = 3000;
 const uploadPath = 'photos';
@@ -16,7 +17,6 @@ const schema = {
         password: Joi.string().min(6).max(30).required()
     },
     photo: {
-        username: Joi.string().required(),
         title: Joi.string().max(50),
         description: Joi.string().max(200)
     }
@@ -54,7 +54,7 @@ app.post('/api/user/', (req, res) => {
     }
 });
 
-app.post('/api/photo/', upload.single('photo'), (req, res) => {
+app.post('/api/photo/', auth, upload.single('photo'), (req, res) => {
     const result = Joi.validate(req.body, schema.photo);
     if (result.error) {
         return res.status(400).send({'error': result.error.details[0].message});
@@ -62,20 +62,18 @@ app.post('/api/photo/', upload.single('photo'), (req, res) => {
     if (!req.file) {
         return res.status(400).send({'error': 'Photo required'});
     }
-    if (!User.get(req.body.username)) {
-        fs.unlink(req.file.path, (err) => {
-            if (!err) {
-                console.log(req.file.path + ' was deleted');
-            }
-        });
-        return res.status(400).send({'error': 'Invalid username'});
-    }
-    const photo = Photo.create(req.body.username, req.body.description, req.file.path);
+    const photo = Photo.create(req.user.username, req.body.description, req.file.path);
     res.send(photo);
 });
 
-app.get('/api/photo/:id', (req, res) => {
+app.get('/api/photo/:id', auth, (req, res) => {
     const photo = Photo.get(Number(req.params.id));
+    if (!photo) {
+        return res.status(400).send({'error': 'Photo not found'});
+    }
+    if (photo.user !== req.user.username) {
+        return res.status(401).send({'error': 'You do not have permission to view this photo'});
+    }
     if (!photo) {
         return res.status(400).send({'error': 'Photo not found'});
     }

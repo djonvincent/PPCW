@@ -37,6 +37,15 @@ exports.get = username => {
     return null;
 };
 
+exports.getUserByApiKey = (apiKey) => {
+    for (let user of users) {
+        if (user.apiKey === apiKey) {
+            return user;
+        }
+    }
+    return null;
+};
+
 exports.signIn = (username, password) => {
     const hash = bcrypt.hashSync(password, 10);
     for (let user of users) {
