@@ -10,12 +10,13 @@ const schema = {
     password: Joi.string().min(6).max(30).required()
 }
 
-router.get('/:username', (req, res) => {
-    const user = User.get(req.params.username);
+router.get('/:id', (req, res) => {
+    let id = Number(req.params.id);
+    const user = User.get(id);
     if (!user) {
         return res.status(400).send({'error':'User not found'});
     }
-    let photos = Photo.getAllByUser(req.params.username);
+    let photos = Photo.getAllByUser(id);
     let expand;
     if (req.query.expand) {
         expand = req.query.expand.split(',');

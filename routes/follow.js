@@ -3,29 +3,23 @@ const User = require('../models/user');
 const auth = require('../middlewares/auth');
 const router = express.Router();
 
-router.post('/:username', auth, (req, res) => {
-    if (!User.get(req.params.username)) {
-        return res.status(400).send({'error': 'Specified user does not exist'});
+router.post('/:id', auth, (req, res) => {
+    let id = Number(req.params.id);
+    try {
+        User.follow(req.user.id, id);
+    } catch (err) {
+        return res.status(400).send({'error': String(err)});
     }
-    if (req.params.username === req.user.username) {
-        return res.status(400).send({'error': 'You cannot follow yourself'});
-    }
-    if (req.user.follows.indexOf(req.params.username) !== -1) {
-        return res.status(400).send({'error': 'You already follow that user'});
-    }
-    req.user.follows.push(req.params.username);
     res.send({'status': 'followed'});
 });
 
-router.delete('/:username', auth, (req, res) => {
-    if (!User.get(req.params.username)) {
-        return res.status(400).send({'error': 'Specified user does not exist'});
+router.delete('/:id', auth, (req, res) => {
+    let id = Number(req.params.id);
+    try {
+        User.unfollow(req.user.id, id);
+    } catch (err) {
+        return res.status(400).send({'error': String(err)});
     }
-    let i = req.user.follows.indexOf(req.params.username);
-    if (i == -1) {
-        return res.status(400).send({'error': "You don't follow that user"});
-    }
-    req.user.follows.splice(i,1);
     res.send({'status': 'unfollowed'});
 });
 

@@ -21,7 +21,7 @@ router.post('/', auth, upload.single('photo'), (req, res) => {
     if (!req.file) {
         return res.status(400).send({'error': 'Photo required'});
     }
-    const photo = Photo.create(req.user.username, req.body.description, req.file.path);
+    const photo = Photo.create(req.user.id, req.body.description, req.file.path);
     res.send(photo);
 });
 
@@ -30,7 +30,7 @@ router.get('/:id', auth, (req, res) => {
     if (!photo) {
         return res.status(400).send({'error': 'Photo not found'});
     }
-    if (photo.user !== req.user.username) {
+    if (photo.user !== req.user.id) {
         return res.status(401).send({'error': 'You do not have permission to view this photo'});
     }
     if (!photo) {

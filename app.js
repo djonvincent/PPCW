@@ -34,7 +34,7 @@ app.get('/api/login/', (req, res) => {
 
 app.get('/api/feed', auth, (req, res) => {
     let dateFrom = req.query.dateFrom || 0;
-    let photos = Photo.getFeed(req.user.follows, dateFrom);
+    let photos = Photo.getAllByUsers(req.user.follows, dateFrom);
     res.send(photos);
 });
 

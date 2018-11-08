@@ -1,47 +1,58 @@
-const photos =[];
-let lastPhotoId = 0;
+const photos = {};
+let lastId = 0;
 
-exports.create = (username, description, path) => {
+exports.create = (userId, description, path) => {
     const photo = {
-        id: lastPhotoId,
-        user: username,
+        user: userId,
         description: description,
         date: Date.now(),
         path: path
     };
-    lastPhotoId ++;
-    photos.push(photo);
-    return photo;
+    let id = lastId;
+    photos[id] = photo;
+    lastId ++;
+    return {
+        id: id,
+        ...photo
+    };
 };
 
 exports.get = (id) => {
-    for (let photo of photos) {
-        if (photo.id === id) {
-            return photo;
-        }
+    if (!photos[id]) {
+        return null;
     }
-    return null;
+    return {
+        id: id,
+        ...photos[id]
+    };
 };
 
-exports.getAllByUser = (username) => {
-    const matches = photos.filter(
-        photo => photo.user === username
-    ).map((photo) => {
-        const {user, ...rest} = photo;
-        return rest;
-    });
+exports.getAllByUser = (userId) => {
+    let matches = [];
+    for (let id in photos) {
+        if (photos[id].user === userId) {
+            matches.push({
+                id: Number(id),
+                ...photos[id]
+            })
+        }
+    }
     return matches;
 };
 
-exports.getFeed = (usernames, dateFrom) => {
+exports.getAllByUsers = (ids, dateFrom) => {
     let feed = [];
-    for (let i = photos.length-1; i >= 0; i--) {
-        if (usernames.indexOf(photos[i].user) !== -1 &&
-            dateFrom <= photos[i].date) {
-            feed.push(photos[i]);
+    for (let id in photos) {
+        if (ids.indexOf(photos[id].user) !== -1 &&
+            dateFrom <= photos[id].date) {
+            feed.push({
+                id: Number(id),
+                ...photos[id]
+            });
         }
     }
     // Sort photos in reverse data order (latest first)
+    feed.reverse();
     feed.sort((a,b) => b.date - a.date);
     return feed;
 };
