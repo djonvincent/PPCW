@@ -124,8 +124,8 @@ app.delete('/api/follow/:username', auth, (req, res) => {
 });
 
 app.get('/api/feed', auth, (req, res) => {
-    req.query.dateFrom = req.query.dateFrom || 0;
-    let photos = Photo.getFeed(req.user.follows, req.params.dateFrom);
+    let dateFrom = req.query.dateFrom || 0;
+    let photos = Photo.getFeed(req.user.follows, dateFrom);
     res.send(photos);
 });
 

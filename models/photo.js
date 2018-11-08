@@ -35,12 +35,14 @@ exports.getAllByUser = (username) => {
 
 exports.getFeed = (usernames, dateFrom) => {
     let feed = [];
-    for (let photo of photos) {
-        if (usernames.indexOf(photo.user) !== -1 &&
-            dateFrom <= photo.date) {
-            feed.push(photo);
+    for (let i = photos.length-1; i >= 0; i--) {
+        if (usernames.indexOf(photos[i].user) !== -1 &&
+            dateFrom <= photos[i].date) {
+            feed.push(photos[i]);
         }
     }
+    // Sort photos in reverse data order (latest first)
+    feed.sort((a,b) => b.date - a.date);
     return feed;
 };
 
