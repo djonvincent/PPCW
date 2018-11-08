@@ -33,3 +33,14 @@ exports.getAllByUser = (username) => {
     return matches;
 };
 
+exports.getFeed = (usernames, dateFrom) => {
+    let feed = [];
+    for (let photo of photos) {
+        if (usernames.indexOf(photo.user) !== -1 &&
+            dateFrom <= photo.date) {
+            feed.push(photo);
+        }
+    }
+    return feed;
+};
+

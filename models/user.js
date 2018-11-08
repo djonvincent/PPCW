@@ -30,7 +30,7 @@ exports.create = (username, password) => {
 exports.get = username => {
     for (let user of users) {
         if (user.username === username) {
-            const {passwordHash, ...rest} = user;
+            const {passwordHash, apiKey, ...rest} = user;
             return rest;
         }
     }

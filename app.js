@@ -101,6 +101,9 @@ app.post('/api/follow/:username', auth, (req, res) => {
     if (!User.get(req.params.username)) {
         return res.status(400).send({'error': 'Specified user does not exist'});
     }
+    if (req.params.username === req.user.username) {
+        return res.status(400).send({'error': 'You cannot follow yourself'});
+    }
     if (req.user.follows.indexOf(req.params.username) !== -1) {
         return res.status(400).send({'error': 'You already follow that user'});
     }
@@ -118,6 +121,12 @@ app.delete('/api/follow/:username', auth, (req, res) => {
     }
     req.user.follows.splice(i,1);
     res.send({'status': 'unfollowed'});
+});
+
+app.get('/api/feed', auth, (req, res) => {
+    req.query.dateFrom = req.query.dateFrom || 0;
+    let photos = Photo.getFeed(req.user.follows, req.params.dateFrom);
+    res.send(photos);
 });
 
 app.listen(port);
