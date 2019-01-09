@@ -4,16 +4,17 @@ const Joi = require('joi');
 const multer = require('multer');
 const User = require('./models/user');
 const Photo = require('./models/photo');
-const auth = require('./middlewares/auth');
+const auth = require('./middlewares/auth').auth;
 const app = express();
+const server = require('http').createServer(app);
 const port = 3000;
 const uploadPath = 'photos';
 const upload = multer({dest: uploadPath + '/'});
 
 app.use(express.json());
-app.use('/api/user', require('./routes/user'));
-app.use('/api/photo', require('./routes/photo'));
-app.use('/api/follow', require('./routes/follow'));
+app.use('/people', require('./routes/user'));
+app.use('/photo', require('./routes/photo'));
+app.use('/follow', require('./routes/follow'));
 
 app.get('/api/login/', (req, res) => {
     if (!req.headers.authorization) {
@@ -42,4 +43,13 @@ if (!fs.existsSync('photos')) {
     fs.mkdirSync('photos');
 }
 
-app.listen(port);
+User.create(
+    'doctorwhocomposer',
+    'password',
+    'Delia',
+    'Derbyshire'
+);
+
+server.listen(port);
+
+module.exports = server;

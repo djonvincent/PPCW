@@ -1,6 +1,15 @@
 User = require('../models/user');
 
-module.exports = (req, res, next) => {
+module.exports.system = (req, res, next) => {
+    console.log(req.body);
+    if (req.body.access_token === 'concertina') {
+        next();
+    } else {
+        res.status(403).send({'error': 'No access_token field provided'});
+    }
+};
+
+module.exports.auth = (req, res, next) => {
     if (!req.headers.authorization) {
         return res.status(401).send({'error': 'No authorization header specified'})
     }

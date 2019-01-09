@@ -11,13 +11,15 @@ function generateAPIKey() {
     return key;
 }
 
-exports.create = (username, password) => {
+exports.create = (username, password, forename, surname) => {
     if (exports.get(username)) {
         throw "User already exists";
     }
     const hash = bcrypt.hashSync(password, 10);
     const user = {
         username: username,
+        forename: forename,
+        surname: surname,
         passwordHash: hash,
         apiKey: generateAPIKey(),
         follows: []
@@ -35,6 +37,13 @@ exports.get = username => {
         }
     }
     return null;
+};
+
+exports.getAll = () => {
+    return users.map(user => {
+        const {passwordHash, apiKey, follows, ...rest} = user;
+        return rest;
+    });
 };
 
 exports.getUserByApiKey = (apiKey) => {

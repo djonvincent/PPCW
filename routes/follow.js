@@ -1,6 +1,6 @@
 const express = require('express');
 const User = require('../models/user');
-const auth = require('../middlewares/auth');
+const auth = require('../middlewares/auth').auth;
 const router = express.Router();
 
 router.post('/:username', auth, (req, res) => {

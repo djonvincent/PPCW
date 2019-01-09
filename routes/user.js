@@ -2,13 +2,17 @@ const express = require('express');
 const Joi = require('joi');
 const User = require('../models/user');
 const Photo = require('../models/photo');
-const auth = require('../middlewares/auth');
+const Auth = require('../middlewares/auth');
 const router = express.Router();
 
 const schema = {
     username: Joi.string().alphanum().min(3).max(30).required(),
     password: Joi.string().min(6).max(30).required()
 }
+
+router.get('/', (req, res) => {
+    res.send(User.getAll());
+});
 
 router.get('/:username', (req, res) => {
     const user = User.get(req.params.username);
@@ -29,7 +33,7 @@ router.get('/:username', (req, res) => {
     });
 });
 
-router.post('/', (req, res) => {
+router.post('/', Auth.system, (req, res) => {
     const result = Joi.validate(req.body, schema);
     if (result.error) {
         return res.status(400).send({'error': result.error.details[0].message});
