@@ -8,10 +8,11 @@ const auth = require('./middlewares/auth').auth;
 const app = express();
 const server = require('http').createServer(app);
 const port = 3000;
-const uploadPath = 'photos';
+const uploadPath = 'public/photos';
 const upload = multer({dest: uploadPath + '/'});
 
 app.use(express.json());
+app.use(express.static('public'));
 app.use('/people', require('./routes/user'));
 app.use('/photo', require('./routes/photo'));
 app.use('/follow', require('./routes/follow'));
@@ -39,8 +40,8 @@ app.get('/api/feed', auth, (req, res) => {
     res.send(photos);
 });
 
-if (!fs.existsSync('photos')) {
-    fs.mkdirSync('photos');
+if (!fs.existsSync('public/photos')) {
+    fs.mkdirSync('public/photos');
 }
 
 User.create(
