@@ -22,7 +22,7 @@ app.get('/profile/:username', (req, res) => {
     res.sendFile(path.join(__dirname, '/public/profile.html'));
 });
 
-app.get('/api/login/', (req, res) => {
+app.get('/login/', (req, res) => {
     if (!req.headers.authorization) {
         return res.status(401).send();
     }
@@ -39,7 +39,7 @@ app.get('/api/login/', (req, res) => {
     res.send({'key': apiKey});
 });
 
-app.get('/api/feed', auth, (req, res) => {
+app.get('/feed', auth, (req, res) => {
     let dateFrom = req.query.dateFrom || 0;
     let photos = Photo.getFeed(req.user.follows, dateFrom);
     res.send(photos);
@@ -49,16 +49,24 @@ if (!fs.existsSync('public/photos')) {
     fs.mkdirSync('public/photos');
 }
 
-User.create(
+let delia = User.create(
     'doctorwhocomposer',
     'password',
     'Delia',
     'Derbyshire'
-).apiKey = 'concertina';
+)
+delia.apiKey = 'concertina';
+delia.follows.push('watchcollector');
 
+User.create(
+    'watchcollector',
+    'password',
+    'Dion',
+    'HS'
+);
 
 Photo.create(
-    'doctorwhocomposer',
+    'watchcollector',
     'Black Bay Fifty-Eight',
     '/photos/bb58.jpg'
 );
