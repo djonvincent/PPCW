@@ -15,8 +15,24 @@ router.get('/', (req, res) => {
     res.send(User.getAll());
 });
 
+router.get('/me', auth, (req, res) => {
+    let photos = Photo.getAllByUser(req.user.username);
+    let expand;
+    if (req.query.expand) {
+        expand = req.query.expand.split(',');
+    }
+    if (!expand || expand.indexOf('photos') === -1) {
+        photos = photos.map(photo => photo.id);
+    }
+    let {passwordHash, apiKey, ...rest} = req.user
+    res.send({
+        ...rest,
+        photos: photos
+    });
+});
+
 router.get('/:username', (req, res) => {
-    const user = User.get(req.params.username);
+    let user = User.get(req.params.username);
     if (!user) {
         return res.status(400).send({'error':'User not found'});
     }
@@ -47,12 +63,12 @@ router.get('/:username/photos', auth, (req, res) => {
 });
 
 router.post('/', Auth.system, (req, res) => {
-    const result = Joi.validate(req.body, schema);
+    let result = Joi.validate(req.body, schema);
     if (result.error) {
         return res.status(400).send({'error': result.error.details[0].message});
     }
     try {
-        const user = User.create(req.body.username, req.body.password);
+        let user = User.create(req.body.username, req.body.password);
         let {passwordHash, apiKey, ...rest} = user;
         res.send(rest);
     } catch (err) {

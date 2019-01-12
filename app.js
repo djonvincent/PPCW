@@ -29,12 +29,12 @@ app.get('/login/', (req, res) => {
     if (req.headers.authorization.indexOf('Basic ') === -1) {
         return res.status(401).send();
     }
-    const token = req.headers.authorization.substring(6);
-    const plainToken = Buffer.from(token, 'base64').toString();
-    const colonIndex = plainToken.indexOf(':');
-    const username = plainToken.substring(0, colonIndex);
-    const password = plainToken.substring(colonIndex+1);
-    const apiKey = User.signIn(username, password);
+    let token = req.headers.authorization.substring(6);
+    let plainToken = Buffer.from(token, 'base64').toString();
+    let colonIndex = plainToken.indexOf(':');
+    let username = plainToken.substring(0, colonIndex);
+    let password = plainToken.substring(colonIndex+1);
+    let apiKey = User.signIn(username, password);
 
     res.send({'key': apiKey});
 });

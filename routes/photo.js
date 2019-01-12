@@ -14,19 +14,19 @@ const schema = {
 };
 
 router.post('/', auth, upload.single('photo'), (req, res) => {
-    const result = Joi.validate(req.body, schema);
+    let result = Joi.validate(req.body, schema);
     if (result.error) {
         return res.status(400).send({'error': result.error.details[0].message});
     }
     if (!req.file) {
         return res.status(400).send({'error': 'Photo required'});
     }
-    const photo = Photo.create(req.user.username, req.body.description, req.file.path);
+    let photo = Photo.create(req.user.username, req.body.description, req.file.path);
     res.send(photo);
 });
 
 router.get('/:id', auth, (req, res) => {
-    const photo = Photo.get(Number(req.params.id));
+    let photo = Photo.get(Number(req.params.id));
     if (!photo) {
         return res.status(400).send({'error': 'Photo not found'});
     }

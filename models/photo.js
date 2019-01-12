@@ -2,7 +2,7 @@ const photos =[];
 let lastPhotoId = 0;
 
 exports.create = (username, description, path) => {
-    const photo = {
+    let photo = {
         id: lastPhotoId,
         user: username,
         description: description,
@@ -24,10 +24,10 @@ exports.get = (id) => {
 };
 
 exports.getAllByUser = (username) => {
-    const matches = photos.filter(
+    let matches = photos.filter(
         photo => photo.user === username
     ).map((photo) => {
-        const {user, ...rest} = photo;
+        let {user, ...rest} = photo;
         return rest;
     });
     return matches;

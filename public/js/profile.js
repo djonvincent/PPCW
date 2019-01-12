@@ -1,11 +1,25 @@
 let usernameField = document.getElementById('username');
 let nameField = document.getElementById('name');
 let photosList = document.getElementById('photos');
+let followButton = document.getElementById('follow');
 let username = window.location.pathname.substring(9);
 let apiKey = localStorage.getItem('apiKey');
-fetch('/people/' + username + '?expand=photos', {
+fetch('/people/me', {
     method: 'get',
     headers: new Headers({'Authorization': apiKey})
+})
+.then(res => res.json())
+.then(data => {
+    if (data.follows.indexOf(username) === -1) {
+        followButton.value = 'follow';
+        followButton.addEventListener('click', follow);
+    } else {
+        followButton.value = 'unfollow';
+        followButton.addEventListener('click', unfollow);
+    }
+});
+fetch('/people/' + username + '?expand=photos', {
+    method: 'get'
 })
 .then(res => res.json())
 .then(data => {
@@ -22,3 +36,32 @@ fetch('/people/' + username + '?expand=photos', {
         photosList.appendChild(li);
     };
 });
+function follow () {
+    fetch('/follow/' + username, {
+        method: 'post',
+        headers: new Headers({'Authorization': apiKey})
+    })
+    .then(res => {
+        if (!res.ok) {
+            return;
+        }
+        followButton.value = 'unfollow';
+        followButton.removeEventListener('click', follow);
+        followButton.addEventListener('click', unfollow);
+    });
+}
+function unfollow () {
+    fetch('/follow/' + username, {
+        method: 'delete',
+        headers: new Headers({'Authorization': apiKey})
+    })
+    .then(res => {
+        if (!res.ok) {
+            return;
+        }
+        followButton.value = 'follow';
+        followButton.removeEventListener('click', unfollow);
+        followButton.addEventListener('click', follow);
+    });
+}
+

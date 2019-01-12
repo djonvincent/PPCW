@@ -16,8 +16,8 @@ exports.create = (username, password, forename, surname) => {
     if (exports.get(username)) {
         throw "User already exists";
     }
-    const hash = bcrypt.hashSync(password, 10);
-    const user = {
+    let hash = bcrypt.hashSync(password, 10);
+    let user = {
         username: username,
         forename: forename,
         surname: surname,
@@ -44,7 +44,7 @@ exports.get = username => {
 
 exports.getAll = () => {
     return users.map(user => {
-        const {passwordHash, apiKey, follows, ...rest} = user;
+        let {passwordHash, apiKey, follows, ...rest} = user;
         return rest;
     });
 };
@@ -59,7 +59,7 @@ exports.getUserByApiKey = (apiKey) => {
 };
 
 exports.signIn = (username, password) => {
-    const hash = bcrypt.hashSync(password, 10);
+    let hash = bcrypt.hashSync(password, 10);
     for (let user of users) {
         if (user.username === username &&
             bcrypt.compareSync(password, user.passwordHash)) {
@@ -75,6 +75,6 @@ exports.search = (term, limit) => {
         ranks[user.username] = ss.compareTwoStrings(term, user.username);
     }
     let usernames = users.map(user => user.username);
-    usernames.sort((a,b) => ranks[b] - rank[a]);
+    usernames.sort((a,b) => ranks[b] - ranks[a]);
     return usernames.slice(0, limit);
 };

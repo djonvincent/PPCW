@@ -35,8 +35,9 @@ fetch('/feed', {
 .then(data => {
     for(let i=0; i<data.length; i++) {
         let li = document.createElement('li');
-        let title = document.createElement('p');
+        let title = document.createElement('a');
         title.innerHTML = data[i].user;
+        title.href = '/profile/' + data[i].user;
         let desc = document.createElement('p');
         desc.innerHTML = data[i].description;
         let dateField = document.createElement('p');
