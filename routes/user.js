@@ -3,6 +3,7 @@ const Joi = require('joi');
 const User = require('../models/user');
 const Photo = require('../models/photo');
 const Auth = require('../middlewares/auth');
+const auth = Auth.auth;
 const router = express.Router();
 
 const schema = {
@@ -31,6 +32,17 @@ router.get('/:username', (req, res) => {
         ...user,
         photos: photos
     });
+});
+
+router.get('/:username/photos', auth, (req, res) => {
+    let user = User.get(req.params.username);
+    if (!user) {
+        return res.status(400).send({'error': 'User not found'});
+    }
+    if ([...req.user.follows, req.user.username].indexOf(req.params.username) === -1) {
+        return res.status(401).send({'error': 'You do not permission to view this'});
+    }
+    res.send(Photo.getAllByUser(user.username));
 });
 
 router.post('/', Auth.system, (req, res) => {

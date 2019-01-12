@@ -51,6 +51,12 @@ User.create(
     'Derbyshire'
 );
 
+Photo.create(
+    'doctorwhocomposer',
+    'Black Bay Fifty-Eight',
+    'public/photos/bb58.jpg'
+);
+
 server.listen(port);
 
 module.exports = server;
