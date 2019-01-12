@@ -25,15 +25,17 @@ exports.create = (username, password, forename, surname) => {
         follows: []
     };
     users.push(user);
-    const {passwordHash, ...rest} = user;
-    return rest;
+    //const {passwordHash, ...rest} = user;
+    //return rest;
+    return user;
 }
 
 exports.get = username => {
     for (let user of users) {
         if (user.username === username) {
-            const {passwordHash, apiKey, ...rest} = user;
-            return rest;
+            //const {passwordHash, apiKey, ...rest} = user;
+            //return rest;
+            return user;
         }
     }
     return null;

@@ -28,8 +28,9 @@ router.get('/:username', (req, res) => {
     if (!expand || expand.indexOf('photos') === -1) {
         photos = photos.map(photo => photo.id);
     }
+    let {passwordHash, apiKey, ...rest} = user
     res.send({
-        ...user,
+        ...rest,
         photos: photos
     });
 });
@@ -52,7 +53,8 @@ router.post('/', Auth.system, (req, res) => {
     }
     try {
         const user = User.create(req.body.username, req.body.password);
-        res.send(user);
+        let {passwordHash, apiKey, ...rest} = user;
+        res.send(rest);
     } catch (err) {
         res.status(400).send({'error': 'That username has been taken'});
     }

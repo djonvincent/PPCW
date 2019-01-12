@@ -10,12 +10,17 @@ const server = require('http').createServer(app);
 const port = 3000;
 const uploadPath = 'public/photos';
 const upload = multer({dest: uploadPath + '/'});
+const path = require('path');
 
 app.use(express.json());
 app.use(express.static('public'));
 app.use('/people', require('./routes/user'));
 app.use('/photo', require('./routes/photo'));
 app.use('/follow', require('./routes/follow'));
+
+app.get('/profile/:username', (req, res) => {
+    res.sendFile(path.join(__dirname, '/public/profile.html'));
+});
 
 app.get('/api/login/', (req, res) => {
     if (!req.headers.authorization) {
@@ -49,12 +54,13 @@ User.create(
     'password',
     'Delia',
     'Derbyshire'
-);
+).apiKey = 'concertina';
+
 
 Photo.create(
     'doctorwhocomposer',
     'Black Bay Fifty-Eight',
-    'public/photos/bb58.jpg'
+    '/photos/bb58.jpg'
 );
 
 server.listen(port);
