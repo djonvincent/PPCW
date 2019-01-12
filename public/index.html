@@ -1,14 +1,8 @@
-<p>Hello World!</p>
-<ul id='people'></ul>
-<script>
-    fetch('/people', {method: 'get'})
-    .then(res => res.json())
-    .then(data => {
-        let list = document.getElementById('people');
-        data.forEach(p => {
-            let li = document.createElement('li');
-            li.innerHTML = p.username;
-            list.appendChild(li);
-        });
-    });
-</script>
+<html>
+    <body>
+        <input id="searchField" type="text">
+        <input id="searchButton" type="button" value="Search"/>
+        <ul id="results"></ul>
+    </body>
+    <script src="/js/index.js"></script>
+</html>

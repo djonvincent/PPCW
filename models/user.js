@@ -1,4 +1,5 @@
 const bcrypt = require('bcrypt');
+const ss = require('string-similarity');
 const apiKeyChars = "QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm1234567890";
 const apiKeyLength = 32;
 const users = [];
@@ -66,4 +67,14 @@ exports.signIn = (username, password) => {
         }
     }
     return null;
+};
+
+exports.search = (term, limit) => {
+    let ranks = {};
+    for(user of users) {
+        ranks[user.username] = ss.compareTwoStrings(term, user.username);
+    }
+    let usernames = users.map(user => user.username);
+    usernames.sort((a,b) => ranks[b] - rank[a]);
+    return usernames.slice(0, limit);
 };

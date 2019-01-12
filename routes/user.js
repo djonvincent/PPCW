@@ -60,4 +60,15 @@ router.post('/', Auth.system, (req, res) => {
     }
 });
 
+router.get('/search/:term', (req, res) => {
+    let limit = 10;
+    if (req.query.limit) {
+        let customLimit = parseInt(req.query.limit);
+        if (!customLimit.isNan()) {
+            limit = customLimit;
+        }
+    }
+    res.send(User.search(req.params.term, limit));
+});
+
 module.exports = router;
