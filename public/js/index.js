@@ -1,9 +1,14 @@
 let searchField = document.getElementById('searchField');
-let searchButton = document.getElementById('searchButton');
 let results = document.getElementById('results');
-searchButton.addEventListener('click', e => {
+let inDebounce;
+searchField.addEventListener('input', () => {
+    clearTimeout(inDebounce);
+    inDebounce = setTimeout(updateResults, 500);
+});
+function updateResults () {
     let term = searchField.value;
     if (term === '') {
+        results.innerHTML = '';
         return;
     }
     fetch('/people/search/' + term, {method: 'get'})
@@ -19,4 +24,4 @@ searchButton.addEventListener('click', e => {
             results.appendChild(li);
         }
     });
-});
+};
