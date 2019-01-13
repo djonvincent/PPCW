@@ -5,7 +5,7 @@ const User = require('../models/user');
 const Photo = require('../models/photo');
 const auth = require('../middlewares/auth').auth;
 const router = express.Router();
-const uploadPath = 'photos';
+const uploadPath = 'public/photos';
 const upload = multer({dest: uploadPath + '/'});
 
 const schema = {
@@ -21,7 +21,8 @@ router.post('/', auth, upload.single('photo'), (req, res) => {
     if (!req.file) {
         return res.status(400).send({'error': 'Photo required'});
     }
-    let photo = Photo.create(req.user.username, req.body.description, req.file.path);
+    let path = '/photos/' + req.file.filename;
+    let photo = Photo.create(req.user.username, req.body.description, path);
     res.send(photo);
 });
 
