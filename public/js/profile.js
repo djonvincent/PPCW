@@ -10,6 +10,10 @@ fetch('/people/me', {
 })
 .then(res => res.json())
 .then(data => {
+    if (data.username === username) {
+        followButton.hidden = true;
+        return;
+    }
     if (data.follows.indexOf(username) === -1) {
         followButton.value = 'follow';
         followButton.addEventListener('click', follow);

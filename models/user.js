@@ -71,10 +71,14 @@ exports.signIn = (username, password) => {
 
 exports.search = (term, limit) => {
     let ranks = {};
+    let usernames = []
     for(user of users) {
-        ranks[user.username] = ss.compareTwoStrings(term, user.username);
+        let rank = ss.compareTwoStrings(term, user.username);
+        if (rank > 0.3) {
+            usernames.push(user.username);
+            ranks[user.username] = rank
+        }
     }
-    let usernames = users.map(user => user.username);
     usernames.sort((a,b) => ranks[b] - ranks[a]);
     return usernames.slice(0, limit);
 };
