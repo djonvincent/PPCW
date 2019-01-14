@@ -1,7 +1,6 @@
 let photoField = document.getElementById('photoField');
 let descField = document.getElementById('description');
 let uploadButton = document.getElementById('uploadButton');
-let apiKey = localStorage.getItem('apiKey');
 uploadButton.addEventListener('click', e => {
     if (photoField.files.length !== 1) {
         return;
@@ -15,7 +14,6 @@ uploadButton.addEventListener('click', e => {
         body: fd
     })
     .then(res => {
-        photoField.value = '';
-        descField.value = '';
+        navigate('/');
     });
 });

@@ -1,15 +1,14 @@
 <html>
     <head>
-        <script src="/js/redirect.js"></script>
     </head>
-    <body>
-        <a href="/upload.html">Upload</a>
-        <a id="logout" href='#'>Logout</a>
-        <input id="searchField" type="text" placeholder="Search">
-        <ul id="results"></ul>
-        <h2>Feed</h2>
-        <ul id="feed"></ul>
-    </body>
-    <script src="/js/logout.js"></script>
+    <a class="route" href="/login">Login</a>
+    <a class="route" href="/">Feed</a>
+    <a class="route" href="/upload">Upload</a>
+    <div id="container"></div>
     <script src="/js/index.js"></script>
+    <script src="/templates/feed.js"></script>
+    <script src="/templates/login.js"></script>
+    <script src="/templates/profile.js"></script>
+    <script src="/templates/upload.js"></script>
+    <script src="/js/routes.js"></script>
 </html>

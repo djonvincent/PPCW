@@ -18,7 +18,8 @@ loginButton.addEventListener('click', e => {
     })
     .then(data => {
         localStorage.setItem('apiKey', data.key);
-        window.location.pathname = '/';
+        window.apiKey = data.key;
+        navigate('/');
     })
     .catch(err => {
         alert('Invalid credentials');

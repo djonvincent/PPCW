@@ -18,10 +18,6 @@ app.use('/people', require('./routes/user'));
 app.use('/photo', require('./routes/photo'));
 app.use('/follow', require('./routes/follow'));
 
-app.get('/profile/:username', (req, res) => {
-    res.sendFile(path.join(__dirname, '/public/profile.html'));
-});
-
 app.get('/login/', (req, res) => {
     if (!req.headers.authorization) {
         return res.status(401).send();
@@ -43,6 +39,10 @@ app.get('/feed', auth, (req, res) => {
     let dateFrom = req.query.dateFrom || 0;
     let photos = Photo.getFeed(req.user.follows, dateFrom);
     res.send(photos);
+});
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '/public/index.html'));
 });
 
 if (!fs.existsSync('public/photos')) {
