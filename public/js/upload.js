@@ -1,14 +1,14 @@
-let photoField = document.getElementById('photoField');
-let descField = document.getElementById('description');
+let uploadFile = document.getElementById('uploadFile');
+let uploadDescription = document.getElementById('uploadDescription');
 let uploadButton = document.getElementById('uploadButton');
 uploadButton.addEventListener('click', e => {
-    if (photoField.files.length !== 1) {
+    if (uploadFile.files.length !== 1) {
         return;
     }
     let fd = new FormData();
-    fd.append('photo', photoField.files[0]);
-    fd.append('description', descField.value);
-    fetch('/photo', {
+    fd.append('photo', uploadFile.files[0]);
+    fd.append('description', uploadDescription.value);
+    fetch('/api/photo', {
         method: 'post',
         headers: new Headers({'Authorization': apiKey}),
         body: fd

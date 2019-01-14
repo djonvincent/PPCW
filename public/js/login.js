@@ -1,10 +1,10 @@
-let usernameField = document.getElementById('username');
-let passwordField = document.getElementById('password');
+let loginUsername = document.getElementById('loginUsername');
+let loginPassword = document.getElementById('loginPassword');
 let loginButton = document.getElementById('loginButton');
 loginButton.addEventListener('click', e => {
-    let username = usernameField.value;
-    let password = passwordField.value;
-    fetch('/login', {
+    let username = loginUsername.value;
+    let password = loginPassword.value;
+    fetch('/api/login', {
         method: 'get',
         headers: new Headers({
             'Authorization': 'Basic ' + btoa(username + ':' + password)

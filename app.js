@@ -14,11 +14,11 @@ const path = require('path');
 
 app.use(express.json());
 app.use(express.static('public'));
-app.use('/people', require('./routes/user'));
-app.use('/photo', require('./routes/photo'));
-app.use('/follow', require('./routes/follow'));
+app.use('/api/people', require('./routes/user'));
+app.use('/api/photo', require('./routes/photo'));
+app.use('/api/follow', require('./routes/follow'));
 
-app.get('/login/', (req, res) => {
+app.get('/api/login', (req, res) => {
     if (!req.headers.authorization) {
         return res.status(401).send();
     }
@@ -31,17 +31,19 @@ app.get('/login/', (req, res) => {
     let username = plainToken.substring(0, colonIndex);
     let password = plainToken.substring(colonIndex+1);
     let apiKey = User.signIn(username, password);
-
+    if (!apiKey) {
+        return res.status(401).send({'error': 'Username/password not found'});
+    }
     res.send({'key': apiKey});
 });
 
-app.get('/feed', auth, (req, res) => {
+app.get('/api/feed', auth, (req, res) => {
     let dateFrom = req.query.dateFrom || 0;
     let photos = Photo.getFeed(req.user.follows, dateFrom);
     res.send(photos);
 });
 
-app.get('*', (req, res) => {
+app.get(['/', '/login', '/upload', '/profile/:username'], (req, res) => {
     res.sendFile(path.join(__dirname, '/public/index.html'));
 });
 

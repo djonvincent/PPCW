@@ -1,14 +1,40 @@
 <html>
     <head>
+        <link rel="stylesheet" href="/styles/index.css">
     </head>
     <a class="route" href="/login">Login</a>
     <a class="route" href="/">Feed</a>
     <a class="route" href="/upload">Upload</a>
-    <div id="container"></div>
+    <a class="route" href="/profile/me">My Profile</a>
+    <input id="searchField" type="text" placeholder="Search">
+    <ul id="results"></ul>
+    <div id="container">
+        <div class="page" data-route="/">
+            <h2>Feed</h2>
+            <input id ="feedRefreshButton" type="button" value="Refresh">
+            <ul id="feed"></ul>
+        </div>
+        <div class="page" data-route="/login">
+            <input id="loginUsername" type="text" placeholder="Username">
+            <input id="loginPassword" type="password" placeholder="Password">
+            <input id="loginButton" type="button" value="Login">
+        </div>
+        <div class="page" data-route="/upload">
+            <input id="uploadFile" type="file" accept="image/*">
+            <input id="uploadDescription" type="text" placeholder="Description">
+            <input id="uploadButton" type="button" value="Upload">
+        </div>
+        <div class="page" data-route="/profile/:username" data-handler="loadProfile">
+            <h1 id="profileUsername"></h1>
+            <p id="profileName"></p>
+            <input id="profileFollowButton" type="button">
+            <ul id="profilePhotos"></ul>
+        </div>
+    </div>
     <script src="/js/index.js"></script>
-    <script src="/templates/feed.js"></script>
-    <script src="/templates/login.js"></script>
-    <script src="/templates/profile.js"></script>
-    <script src="/templates/upload.js"></script>
+    <script src="/js/feed.js"></script>
+    <script src="/js/login.js"></script>
+    <script src="/js/upload.js"></script>
+    <script src="/js/profile.js"></script>
     <script src="/js/routes.js"></script>
 </html>
