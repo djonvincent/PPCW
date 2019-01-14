@@ -47,7 +47,6 @@ function loadPage (path) {
             for (let i=0; i<route.params.length; i++) {
                 params[route.params[i]] = m[i+1];
             }
-            console.log(params);
             if (active) {
                 active.classList.remove('active');
             }
