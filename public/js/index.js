@@ -1,4 +1,3 @@
-let apiKey = localStorage.getItem('apiKey');
 let searchField = document.getElementById('searchField');
 let results = document.getElementById('results');
 let inDebounce;

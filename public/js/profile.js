@@ -7,6 +7,7 @@ function profileHandler(params) {
     loadProfile();
 
     function loadProfile() {
+        let apiKey = localStorage.getItem('apiKey');
         let username = params.username;
         fetch('/api/people/me', {
             method: 'get',
@@ -51,6 +52,7 @@ function profileHandler(params) {
     };
 
     function follow () {
+        let apiKey = localStorage.getItem('apiKey');
         fetch('/api/follow/' + params.username, {
             method: 'post',
             headers: new Headers({'Authorization': apiKey})
@@ -66,6 +68,7 @@ function profileHandler(params) {
     }
 
     function unfollow () {
+        let apiKey = localStorage.getItem('apiKey');
         fetch('/api/follow/' + params.username, {
             method: 'delete',
             headers: new Headers({'Authorization': apiKey})

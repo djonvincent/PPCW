@@ -2,6 +2,7 @@ let uploadFile = document.getElementById('uploadFile');
 let uploadDescription = document.getElementById('uploadDescription');
 let uploadButton = document.getElementById('uploadButton');
 uploadButton.addEventListener('click', e => {
+    let apiKey = localStorage.getItem('apiKey');
     if (uploadFile.files.length !== 1) {
         return;
     }

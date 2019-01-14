@@ -1,7 +1,9 @@
 let loginUsername = document.getElementById('loginUsername');
 let loginPassword = document.getElementById('loginPassword');
 let loginButton = document.getElementById('loginButton');
-loginButton.addEventListener('click', e => {
+let loginForm = document.getElementById('loginForm');
+loginForm.addEventListener('submit', e => {
+    e.preventDefault();
     let username = loginUsername.value;
     let password = loginPassword.value;
     fetch('/api/login', {
@@ -11,14 +13,15 @@ loginButton.addEventListener('click', e => {
         })
     })
     .then(res => {
-        if (res.ok) {
-            return res.json();
+        if (!res.ok) {
+            throw Error(response.statusText);
         }
-        throw Error(response.statusText);
+        return res.json();
     })
     .then(data => {
+        loginUsername.innerHTML = '';
+        loginPassword.innerHTML = '';
         localStorage.setItem('apiKey', data.key);
-        window.apiKey = data.key;
         navigate('/');
     })
     .catch(err => {

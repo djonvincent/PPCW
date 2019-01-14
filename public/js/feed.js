@@ -3,6 +3,7 @@ let feedRefreshButton = document.getElementById('feedRefreshButton');
 updateFeed();
 feedRefreshButton.addEventListener('click', updateFeed);
 function updateFeed () {
+    let apiKey = localStorage.getItem('apiKey');
     fetch('/api/feed', {
         method: 'get',
         headers: new Headers({'Authorization': apiKey})
