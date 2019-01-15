@@ -5,3 +5,19 @@ div.page {
 div.page.active {
     display: block;
 }
+
+a.username {
+    color: #000;
+    text-decoration: none !important;
+    font-weight: bold;
+    display: block;
+}
+
+#results {
+    width: 227px;
+    padding: .375rem .75rem;
+}
+
+#resultsSpinner {
+    margin-left: -1.6rem;
+}

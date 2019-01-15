@@ -17,11 +17,12 @@ document.querySelectorAll('div.page').forEach(el => {
 
 loadPage(window.location.pathname);
 
-document.querySelectorAll('a.route').forEach(el => {
-    el.addEventListener('click', e => {
+document.addEventListener('click', e  => {
+    let el = e.target
+    if (el.classList.contains('route') && el.tagName === 'A') {
         e.preventDefault();
         navigate(el.pathname);
-    });
+    };
 });
 
 window.onpopstate = () => {
@@ -42,6 +43,7 @@ function loadPage (path) {
     for (route of routes) {
         let m = path.match(route.re)
         if (m) {
+            changeActiveNavItem(path);
             let newActive = route.el;
             let params = {}
             for (let i=0; i<route.params.length; i++) {
@@ -57,3 +59,15 @@ function loadPage (path) {
         }
     }
 };
+
+function changeActiveNavItem(path) {
+    let active = document.querySelector('.nav-item.active');
+    let link = document.querySelector(`a.route[href='${path}']`);
+    if (link) {
+        let newActive = link.parentElement;
+        if (active) {
+            active.classList.remove('active');
+        }
+        newActive.classList.add('active');
+    }
+}

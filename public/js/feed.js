@@ -16,6 +16,7 @@ function updateFeed () {
             let title = document.createElement('a');
             title.innerHTML = data[i].user;
             title.href = '/profile/' + data[i].user;
+            title.className = "username route";
             let desc = document.createElement('p');
             desc.innerHTML = data[i].description;
             let dateField = document.createElement('p');
@@ -25,9 +26,9 @@ function updateFeed () {
             let img = document.createElement('img');
             img.src = data[i].path;
             li.appendChild(title);
-            li.appendChild(desc);
-            li.appendChild(dateField)
             li.appendChild(img);
+            li.appendChild(dateField)
+            li.appendChild(desc);
             feed.appendChild(li);
         };
     });
