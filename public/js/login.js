@@ -23,6 +23,7 @@ loginForm.addEventListener('submit', e => {
         loginPassword.innerHTML = '';
         localStorage.setItem('apiKey', data.key);
         navigate('/');
+        updateFeed();
     })
     .catch(err => {
         alert('Invalid credentials');

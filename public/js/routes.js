@@ -47,13 +47,13 @@ function loadPage (path) {
             for (let i=0; i<route.params.length; i++) {
                 params[route.params[i]] = m[i+1];
             }
+            if (route.handler) {
+                route.handler(params);
+            }
             if (active) {
                 active.classList.remove('active');
             }
             newActive.classList.add('active');
-            if (route.handler) {
-                route.handler(params);
-            }
         }
     }
 };

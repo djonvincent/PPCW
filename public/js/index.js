@@ -1,5 +1,6 @@
 let searchField = document.getElementById('searchField');
 let results = document.getElementById('results');
+let logoutButton = document.getElementById('logoutButton');
 let inDebounce;
 searchField.addEventListener('input', () => {
     clearTimeout(inDebounce);
@@ -26,3 +27,9 @@ function updateSearchResults () {
         }
     });
 };
+
+logoutButton.addEventListener('click', () => {
+    localStorage.removeItem('apiKey');
+    navigate('/login');
+    updateFeed();
+});
