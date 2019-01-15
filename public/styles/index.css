@@ -1,3 +1,7 @@
+body {
+    padding-top: 80px;
+}
+
 div.page {
     display: none;
 }
@@ -11,6 +15,26 @@ a.username {
     text-decoration: none !important;
     font-weight: bold;
     display: block;
+}
+
+ul.photos {
+    list-style-type: none;
+    padding: 0;
+}
+
+ul.photos img {
+    width: 100%;
+}
+
+@media screen and (min-width: 1080px) {
+    #container {
+        max-width: 800px;
+    }
+}
+
+#container {
+    padding: 0;
+    margin: 0 auto;
 }
 
 #results {
