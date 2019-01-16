@@ -64,13 +64,14 @@ function loadPage (path) {
 };
 
 function changeActiveNavItem(path) {
-    let active = document.querySelector('.nav-item.active');
-    let link = document.querySelector(`a.route[href='${path}']`);
-    if (link) {
-        let newActive = link.parentElement;
-        if (active) {
-            active.classList.remove('active');
-        }
-        newActive.classList.add('active');
+    let actives = document.querySelectorAll('.nav-item.active');
+    let links = document.querySelectorAll(`a.route[href='${path}']`);
+    links.forEach(el => {
+        el.parentElement.classList.add('active');
+    });
+    if (links) {
+        actives.forEach(el => {
+            el.classList.remove('active');
+        });
     }
 }

@@ -70,7 +70,13 @@ User.create(
 Photo.create(
     'watchcollector',
     'Black Bay Fifty-Eight',
-    '/photos/bb58.jpg'
+    '/images/bb58.jpg'
+);
+
+Photo.create(
+    'watchcollector',
+    'Omega Seamaster',
+    '/images/smp.jpg'
 );
 
 server.listen(port);

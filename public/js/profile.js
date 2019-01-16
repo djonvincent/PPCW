@@ -43,6 +43,7 @@ function profileHandler(params) {
                 let title = document.createElement('p');
                 title.innerHTML = data.photos[i].description;
                 let img = document.createElement('img');
+                img.className = 'photo';
                 img.src = data.photos[i].path;
                 li.appendChild(title);
                 li.appendChild(img);
