@@ -2,6 +2,46 @@ let feed = document.getElementById('feed');
 let feedRefreshButton = document.getElementById('feedRefreshButton');
 updateFeed();
 feedRefreshButton.addEventListener('click', updateFeed);
+
+const ptr = PullToRefresh.init({
+    mainElement: '#container',
+    onInit() {
+        feedRefreshButton.style.display = 'none';
+    },
+    distMax: 180,
+    distThreshold: 100,
+    distReload: 80,
+    getMarkup () {
+        return `
+                <div id="ptrSpinner" class="spinner-border"></div>
+        `;
+    },
+    getStyles () {
+        return `
+            .__PREFIX__ptr {
+                pointer-events: none;
+                top: 0;
+                height: 0;
+                transition: height 0.3s, min-height 0.3s;
+                text-align: center;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+                overflow: hidden;
+            }
+            .__PREFIX__pull {
+                transition: none;
+            }
+        `;
+    },
+    onRefresh() {
+        updateFeed();
+    },
+});
+
+console.log(ptr);
+
 function updateFeed () {
     let apiKey = localStorage.getItem('apiKey');
     fetch('/api/feed', {

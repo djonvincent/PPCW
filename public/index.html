@@ -3,6 +3,7 @@
         <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
         <link rel="stylesheet" href="/open-iconic/font/css/open-iconic-bootstrap.min.css">
         <link rel="stylesheet" href="/styles/index.css">
+        <script src="/js/pulltorefresh.min.js"></script>
     </head>
     <nav class="navbar fixed-top navbar-expand navbar-light bg-light">
         <ul class="navbar-nav mr-auto">
@@ -31,7 +32,7 @@
     </div>
     <div id="container">
         <div class="page" data-route="/">
-            <button class="btn" type="button" id="feedRefreshButton">
+            <button class="btn d-none" type="button" id="feedRefreshButton">
                 <span class="oi oi-reload"></span>
             </button>
             <ul id="feed" class="photos"></ul>

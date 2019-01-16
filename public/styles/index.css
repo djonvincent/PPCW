@@ -1,5 +1,5 @@
 body {
-    padding-top: 80px;
+    padding-top: 60px;
 }
 
 div.page {
@@ -15,6 +15,7 @@ a.username {
     text-decoration: none !important;
     font-weight: bold;
     display: block;
+    font-size: 1.25rem;
 }
 
 ul.photos {
@@ -26,15 +27,20 @@ ul.photos img {
     width: 100%;
 }
 
-@media screen and (min-width: 1080px) {
-    #container {
-        max-width: 800px;
-    }
-}
-
 #container {
+    max-width: 800px;
     padding: 0;
     margin: 0 auto;
+}
+
+@media screen and (max-width: 1080px) {
+    #container {
+        max-width: 100%;
+    }
+    
+    a.username {
+        font-size: 2rem;
+    }
 }
 
 #results {
@@ -44,4 +50,14 @@ ul.photos img {
 
 #resultsSpinner {
     margin-left: -1.6rem;
+}
+
+#ptrSpinner {
+    width: 5rem;
+    height: 5rem;
+}
+
+.ptr--refresh {
+    text-align: center !important;
+    width: 100% !important;
 }
