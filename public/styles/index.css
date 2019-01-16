@@ -13,9 +13,7 @@ div.page.active {
 a.username {
     color: #000;
     text-decoration: none !important;
-    font-weight: bold;
-    display: block;
-    font-size: 1.25rem;
+    display: inline-block;
 }
 
 ul.photos {
@@ -23,8 +21,18 @@ ul.photos {
     padding: 0;
 }
 
-ul.photos img {
+ul.photos .username {
+    font-size: 2rem;
+}
+
+img.photo {
     width: 100%;
+}
+
+img.avatar {
+    width: 4vh;
+    height: 4vh;
+    margin: 0 15px 10px 5px;
 }
 
 #container {

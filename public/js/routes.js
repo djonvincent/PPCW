@@ -19,10 +19,13 @@ loadPage(window.location.pathname);
 
 document.addEventListener('click', e  => {
     let el = e.target
-    if (el.classList.contains('route') && el.tagName === 'A') {
+    while (el && !(el.classList.contains('route') && el.tagName === 'A')) {
+        el = el.parentElement;
+    }
+    if (el) {
         e.preventDefault();
         navigate(el.pathname);
-    };
+    }
 });
 
 window.onpopstate = () => {

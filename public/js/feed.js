@@ -40,8 +40,6 @@ const ptr = PullToRefresh.init({
     },
 });
 
-console.log(ptr);
-
 function updateFeed () {
     let apiKey = localStorage.getItem('apiKey');
     fetch('/api/feed', {
@@ -53,10 +51,14 @@ function updateFeed () {
         feed.innerHTML = '';
         for(let i=0; i<data.length; i++) {
             let li = document.createElement('li');
+            let avatar = document.createElement('img');
+            avatar.className = 'rounded-circle avatar';
+            avatar.src = '/images/avatar.png';
             let title = document.createElement('a');
-            title.innerHTML = data[i].user;
             title.href = '/profile/' + data[i].user;
             title.className = "username route";
+            title.appendChild(avatar);
+            title.innerHTML += data[i].user;
             let desc = document.createElement('p');
             desc.innerHTML = data[i].description;
             let dateField = document.createElement('p');
@@ -64,6 +66,7 @@ function updateFeed () {
             let dateString = date.toLocaleDateString() + ' ' + date.toLocaleTimeString();
             dateField.innerHTML = dateString;
             let img = document.createElement('img');
+            img.className = 'photo';
             img.src = data[i].path;
             li.appendChild(title);
             li.appendChild(img);
