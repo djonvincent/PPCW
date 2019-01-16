@@ -4,7 +4,7 @@ updateFeed();
 feedRefreshButton.addEventListener('click', updateFeed);
 
 const ptr = PullToRefresh.init({
-    triggerElement: '#refreshBox',
+    triggerElement: '#feed',
     onInit() {
         feedRefreshButton.style.display = 'none';
     },
