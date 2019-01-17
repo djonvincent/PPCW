@@ -16,10 +16,10 @@ document.querySelectorAll('div.page').forEach(el => {
     });
 });  
 
-loadPage(window.location.pathname);
+navigate(window.location.pathname);
 
 document.addEventListener('click', e  => {
-    let el = e.target
+    let el = e.target;
     while (el && !(el.classList.contains('route') && el.tagName === 'A')) {
         el = el.parentElement;
     }
@@ -34,28 +34,28 @@ window.onpopstate = () => {
 };
 
 function navigate(path) {
-    window.history.pushState(
-        {},
-        path,
-        window.location.origin + path
-    );
-    loadPage(path);
-}
-
-function loadPage (path) {
-    let active = document.querySelector('div.page.active');
 	let m;
 	let route = routes.find(r => {
 		m = path.match(r.re)
 		return m;
 	});
-	if (!route || activeRoute === route) {
+	if (!route) {
 		return;
 	}
 	let params = {}
 	for (let i=0; i<route.params.length; i++) {
 		params[route.params[i]] = m[i+1];
 	}
+    window.history.pushState(
+        {},
+        path,
+        window.location.origin + path
+    );
+    loadPage(route, params);
+	changeActiveNavItem(path);
+}
+
+function loadPage (route, params) {
 	if (route.handler) {
 		route.handler(params);
 	}
@@ -64,7 +64,6 @@ function loadPage (path) {
 	}
 	route.el.classList.add('active');
 	activeRoute = route;
-	changeActiveNavItem(path);
 }
 
 function changeActiveNavItem(path) {

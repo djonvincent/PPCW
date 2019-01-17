@@ -5,9 +5,9 @@ feedRefreshButton.addEventListener('click', updateFeed);
 
 const ptr = PullToRefresh.init({
     triggerElement: '#feed',
-    distMax: 300,
-    distThreshold: 110,
-    distReload: 120,
+    distMax: 200,
+    distThreshold: 100,
+    distReload: 100,
 	resistanceFunction(t) {
 		return 1;
 	},
@@ -33,14 +33,13 @@ const ptr = PullToRefresh.init({
             }
 			#ptrSpinner {
 				display: none;
-				width: 5rem;
-				height: 5rem;
+				height: 3rem;
+				width: 3rem;
 			}
 			.__PREFIX__refresh #ptrSpinner {
 				display: inherit;
 			}
 			#ptrArrow {
-				font-size: 3rem;
 				transition: transform .3s;
 			}
 			.__PREFIX__refresh #ptrArrow {

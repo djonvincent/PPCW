@@ -22,7 +22,6 @@ ul.photos {
 }
 
 ul.photos .username {
-    font-size: 2rem;
 }
 
 img.photo {
@@ -32,7 +31,7 @@ img.photo {
 img.avatar {
     width: 4vh;
     height: 4vh;
-    margin: 0 15px 10px 5px;
+    margin: 0 10px 5px 5px;
 }
 
 #container {
@@ -55,7 +54,7 @@ img.avatar {
 }
 
 #mobileNav .nav-item a {
-    font-size: 5rem;
+    font-size: 1.5rem;
     color: rgb(0,0,0,0.5);
 }
 
@@ -74,10 +73,6 @@ img.avatar {
         max-width: 100%;
     }
     
-    a.username {
-        font-size: 2rem;
-    }
-
 	#desktopNav {
 		display: none;
 	}

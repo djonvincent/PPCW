@@ -4,6 +4,9 @@
         <link rel="stylesheet" href="/open-iconic/font/css/open-iconic-bootstrap.min.css">
         <link rel="stylesheet" href="/styles/index.css">
 		<link rel="manifest" href="/manifest.json">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+		<meta name="HandheldFriendly" content="true">
         <script src="/js/pulltorefresh.min.js"></script>
     </head>
     <nav id="desktopNav" class="navbar fixed-top navbar-expand navbar-light bg-light">
@@ -30,17 +33,22 @@
         </form>
     </nav>
     <ul id="mobileNav" class="nav fixed-bottom bg-light">
-        <li class="nav-item m-2">
+        <li class="nav-item m-1">
             <a class="nav-link route" href="/">
                 <span class="oi oi-home"></span>
             </a>
         </li>
-        <li class="nav-item m-2">
+        <li class="nav-item m-1">
+            <a class="nav-link route" href="/seach">
+                <span class="oi oi-magnifying-glass"></span>
+            </a>
+        </li>
+        <li class="nav-item m-1">
             <a class="nav-link route" href="/upload">
                 <span class="oi oi-plus"></span>
             </a>
         </li>
-        <li class="nav-item m-2">
+        <li class="nav-item m-1">
             <a class="nav-link route" href="/profile/me">
                 <span class="oi oi-person"></span>
             </a>
