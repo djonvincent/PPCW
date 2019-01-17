@@ -1,7 +1,6 @@
 body {
     padding-top: 60px;
 }
-
 div.page {
     display: none;
 }
@@ -25,17 +24,24 @@ ul.photos .username {
 }
 
 .photo {
+	position: relative;
     width: 100%;
-	min-height:200px;
 	background-color: #999;
-}
-
-.photo.loading {
-	height: 100vw;
 }
 
 .photo img {
 	width: 100%;
+}
+
+.photo.loading {
+	padding-top: 100%;
+}
+
+.photo.loading img {
+	width: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
 }
 
 img.avatar {
@@ -72,13 +78,11 @@ img.avatar {
     color: rgb(0,0,0,0.9);
 }
 
-@media screen and (min-width: 1081px) {
-    #mobileNav {
-        display: none;
-    }
+#mobileNav {
+	visibility: hidden;
 }
 
-@media screen and (max-width: 1080px) {
+@media screen and (max-width: 600px) {
     #container {
         max-width: 100%;
     }
@@ -87,8 +91,12 @@ img.avatar {
 		display: none;
 	}
 
+	#mobileNav {
+		visibility: visible;
+	}
+
 	body {
 		padding-top: 0;
-		padding-bottom: 6rem;
+		padding-bottom: 3rem;
 	}
 }
