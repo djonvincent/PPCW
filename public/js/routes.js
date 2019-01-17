@@ -26,11 +26,16 @@ document.addEventListener('click', e  => {
     if (el) {
         e.preventDefault();
         navigate(el.pathname);
+		window.history.pushState(
+			{},
+			el.pathname,
+			window.location.origin + el.pathname
+		);
     }
 });
 
 window.onpopstate = () => {
-    loadPage(window.location.pathname);
+    navigate(window.location.pathname);
 };
 
 function navigate(path) {
@@ -39,18 +44,13 @@ function navigate(path) {
 		m = path.match(r.re)
 		return m;
 	});
-	if (!route) {
+	if (!route || activeRoute === route) {
 		return;
 	}
 	let params = {}
 	for (let i=0; i<route.params.length; i++) {
 		params[route.params[i]] = m[i+1];
 	}
-    window.history.pushState(
-        {},
-        path,
-        window.location.origin + path
-    );
     loadPage(route, params);
 	changeActiveNavItem(path);
 }
