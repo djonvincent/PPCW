@@ -1,4 +1,5 @@
 let routes = [];
+let activeRoute;
 document.querySelectorAll('div.page').forEach(el => {
     let route = el.dataset.route;
     let params = [];
@@ -43,25 +44,28 @@ function navigate(path) {
 
 function loadPage (path) {
     let active = document.querySelector('div.page.active');
-    for (route of routes) {
-        let m = path.match(route.re)
-        if (m) {
-            changeActiveNavItem(path);
-            let newActive = route.el;
-            let params = {}
-            for (let i=0; i<route.params.length; i++) {
-                params[route.params[i]] = m[i+1];
-            }
-            if (route.handler) {
-                route.handler(params);
-            }
-            if (active) {
-                active.classList.remove('active');
-            }
-            newActive.classList.add('active');
-        }
-    }
-};
+	let m;
+	let route = routes.find(r => {
+		m = path.match(r.re)
+		return m;
+	});
+	if (!route || activeRoute === route) {
+		return;
+	}
+	let params = {}
+	for (let i=0; i<route.params.length; i++) {
+		params[route.params[i]] = m[i+1];
+	}
+	if (route.handler) {
+		route.handler(params);
+	}
+	if (activeRoute) {
+		activeRoute.el.classList.remove('active');
+	}
+	route.el.classList.add('active');
+	activeRoute = route;
+	changeActiveNavItem(path);
+}
 
 function changeActiveNavItem(path) {
     let actives = document.querySelectorAll('.nav-item.active');
