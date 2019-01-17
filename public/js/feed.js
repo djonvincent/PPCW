@@ -5,15 +5,16 @@ feedRefreshButton.addEventListener('click', updateFeed);
 
 const ptr = PullToRefresh.init({
     triggerElement: '#feed',
-    onInit() {
-        feedRefreshButton.style.display = 'none';
-    },
-    distMax: 180,
-    distThreshold: 100,
-    distReload: 80,
+    distMax: 300,
+    distThreshold: 110,
+    distReload: 120,
+	resistanceFunction(t) {
+		return 1;
+	},
     getMarkup () {
         return `
-                <div id="ptrSpinner" class="spinner-border"></div>
+			<span id="ptrArrow" class="oi oi-arrow-bottom"></span>
+        	<div id="ptrSpinner" class="spinner-border"></div>
         `;
     },
     getStyles () {
@@ -30,14 +31,36 @@ const ptr = PullToRefresh.init({
                 width: 100%;
                 overflow: hidden;
             }
+			#ptrSpinner {
+				display: none;
+				width: 5rem;
+				height: 5rem;
+			}
+			.__PREFIX__refresh #ptrSpinner {
+				display: inherit;
+			}
+			#ptrArrow {
+				font-size: 3rem;
+				transition: transform .3s;
+			}
+			.__PREFIX__refresh #ptrArrow {
+				display: none;
+			}
             .__PREFIX__pull {
                 transition: none;
             }
+			.__PREFIX__release #ptrArrow {
+				transform: rotate(180deg);
+			}
         `;
     },
+	onInit() {
+		document.getElementById('ptrArrow').style.display = '';
+	},
     onRefresh() {
         updateFeed();
-    },
+		document.getElementById('ptrArrow').style.display = 'none';
+    }
 });
 
 function updateFeed () {
