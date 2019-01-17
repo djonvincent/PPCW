@@ -87,11 +87,16 @@ function updateFeed () {
             let date = new Date(data[i].date);
             let dateString = date.toLocaleDateString() + ' ' + date.toLocaleTimeString();
             dateField.innerHTML = dateString;
+			let photo = document.createElement('div');
+			photo.className = 'photo loading';
             let img = document.createElement('img');
-            img.className = 'photo';
+			img.addEventListener('load', () => {
+				photo.classList.remove('loading');
+			});
             img.src = data[i].path;
+			photo.appendChild(img);
             li.appendChild(title);
-            li.appendChild(img);
+            li.appendChild(photo);
             li.appendChild(dateField)
             li.appendChild(desc);
             feed.appendChild(li);

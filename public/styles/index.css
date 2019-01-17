@@ -24,8 +24,18 @@ ul.photos {
 ul.photos .username {
 }
 
-img.photo {
+.photo {
     width: 100%;
+	min-height:200px;
+	background-color: #999;
+}
+
+.photo.loading {
+	height: 100vw;
+}
+
+.photo img {
+	width: 100%;
 }
 
 img.avatar {
