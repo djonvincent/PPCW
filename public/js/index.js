@@ -3,6 +3,7 @@ let results = document.getElementById('results');
 let resultsSpinner = document.getElementById('resultsSpinner');
 let logoutButton = document.getElementById('logoutButton');
 let inDebounce;
+
 searchField.addEventListener('input', () => {
     results.style.display = 'none';
     clearTimeout(inDebounce);

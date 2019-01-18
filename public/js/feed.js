@@ -1,5 +1,7 @@
 let feed = document.getElementById('feed');
 let feedRefreshButton = document.getElementById('feedRefreshButton');
+let lastRefreshTime;
+
 updateFeed();
 feedRefreshButton.addEventListener('click', updateFeed);
 

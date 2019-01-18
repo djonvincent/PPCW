@@ -10,7 +10,7 @@ const upload = multer({dest: uploadPath + '/'});
 
 const schema = {
     title: Joi.string().max(50),
-    description: Joi.string().max(200)
+    description: Joi.string().max(200).allow('')
 };
 
 router.post('/', auth, upload.single('photo'), (req, res) => {

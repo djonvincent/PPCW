@@ -1,6 +1,7 @@
 body {
     padding-top: 60px;
 }
+
 div.page {
     display: none;
 }
@@ -25,12 +26,14 @@ ul.photos .username {
 
 .photo {
 	position: relative;
-    width: 100%;
 	background-color: #999;
+	text-align: center;
+	width: 100%;
 }
 
 .photo img {
-	width: 100%;
+	max-width: 100%;
+	max-height: 80vh;
 }
 
 .photo.loading {
@@ -82,9 +85,74 @@ img.avatar {
 	visibility: hidden;
 }
 
+#uploadPreview {
+	position: relative;
+	width: 100%;
+	padding-top: 100%;
+	background-color: grey;
+    background-size: contain;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+}
+
+#uploadPreview label {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+#uploadPreview span {
+	font-size: 3rem;
+}
+
+#uploadLoadingScreen {
+    visibility: hidden;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgb(0,0,0,0.4);
+    transition: opacity 0.5s;
+}
+
+#uploadLoadingScreen.loading, #uploadLoadingScreen.success  {
+    opacity: 1;
+    visibility: visible;
+}
+
+#uploadLoadingScreen span {
+    font-size: 5rem;
+    color: #0c0;
+}
+
+#uploadLoadingScreen.loading span {
+    display: none;
+}
+
+#uploadLoadingScreen.success .spinner-border {
+    display: none;
+}
+
+#uploadLoadingScreen .spinner-border {
+    height: 20vw;
+    width: 20vw;
+}
+
+@media screen and (max-height: 600px) {
+	#container {
+		max-width: 400px;
+	}
+}
+
 @media screen and (max-width: 600px) {
     #container {
-        max-width: 100%;
+        width: 100%;
     }
     
 	#desktopNav {

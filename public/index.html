@@ -66,18 +66,38 @@
         <div class="page" data-route="/login">
             <form id="loginForm">
                 <div class="form-group">
-                    <input id="loginUsername" class="form-control" type="text" placeholder="Username">
+                    <input id="loginUsername" class="form-control" type="text" placeholder="Username" autocapitalize="none">
                 </div>
                 <div class="form-group">
                     <input id="loginPassword" class="form-control" type="password" placeholder="Password">
                 </div>
-                <input id="loginButton" class="btn" type="submit" value="Login">
+                <button class="btn btn-primary" id="loginButton" type="submit">Login</button>
             </form>
         </div>
         <div class="page" data-route="/upload">
-            <input id="uploadFile" type="file" accept="image/*">
-            <input id="uploadDescription" type="text" placeholder="Description">
-            <input id="uploadButton" type="button" value="Upload">
+            <form id="uploadForm">
+                <input id="uploadFile" class="d-none" type="file" accept="image/*">
+                <div id="uploadPreview">
+                </div>
+                <div class="form-group">
+                    <textarea id="uploadDescription" class="form-control" rows="3" placeholder="Description"></textarea>
+                    </label>
+                </div>
+                <label for="uploadFile">
+                    <div class="btn btn-primary btn-lg">
+                        <span class="oi oi-image"></span>
+                        Choose
+                    </div>
+                </label>
+                <button class="btn btn-success btn-lg" type="submit">
+                    <span class="oi oi-data-transfer-upload"></span>
+                    Upload
+                </button>
+            </form>
+            <div id="uploadLoadingScreen">
+                <span class="oi oi-check"></span>
+                <div class="spinner-border"></div>
+            </div>
         </div>
         <div class="page" data-route="/profile/:username" data-handler="profileHandler">
             <h1 id="profileUsername"></h1>
