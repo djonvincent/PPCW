@@ -1,10 +1,12 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
     <head>
+        <title>PPCW</title>
         <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
         <link rel="stylesheet" href="/open-iconic/font/css/open-iconic-bootstrap.min.css">
         <link rel="stylesheet" href="/styles/index.css">
 		<link rel="manifest" href="/manifest.json">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 		<meta name="HandheldFriendly" content="true">
         <script src="/js/pulltorefresh.min.js"></script>
@@ -81,14 +83,13 @@
                 </div>
                 <div class="form-group">
                     <textarea id="uploadDescription" class="form-control" rows="3" placeholder="Description"></textarea>
-                    </label>
                 </div>
-                <label for="uploadFile">
-                    <div class="btn btn-primary btn-lg">
+                <div class="btn btn-primary btn-lg">
+                    <label for="uploadFile">
                         <span class="oi oi-image"></span>
                         Choose
-                    </div>
-                </label>
+                    </label>
+                </div>
                 <button class="btn btn-success btn-lg" type="submit">
                     <span class="oi oi-data-transfer-upload"></span>
                     Upload
@@ -102,7 +103,7 @@
         <div class="page" data-route="/profile/:username" data-handler="profileHandler">
             <h1 id="profileUsername"></h1>
             <p id="profileName"></p>
-            <input id="profileFollowButton" type="button">
+            <button class="btn btn-primary" id="profileFollowButton"></button>
             <ul id="profilePhotos" class="photos"></ul>
         </div>
     </div>

@@ -22,10 +22,10 @@ function profileHandler(params) {
                 profileFollowButton.hidden = false;
             }
             if (data.follows.indexOf(username) === -1) {
-                profileFollowButton.value = 'follow';
+                profileFollowButton.innerHTML = 'Follow';
                 profileFollowButton.addEventListener('click', follow);
             } else {
-                profileFollowButton.value = 'unfollow';
+                profileFollowButton.innerHTML = 'Unfollow';
                 profileFollowButton.addEventListener('click', unfollow);
             }
         });
@@ -62,7 +62,7 @@ function profileHandler(params) {
             if (!res.ok) {
                 return;
             }
-            profileFollowButton.value = 'unfollow';
+            profileFollowButton.innerHTML = 'Unfollow';
             profileFollowButton.removeEventListener('click', follow);
             profileFollowButton.addEventListener('click', unfollow);
         });
@@ -78,7 +78,7 @@ function profileHandler(params) {
             if (!res.ok) {
                 return;
             }
-            profileFollowButton.value = 'follow';
+            profileFollowButton.innerHTML = 'Follow';
             profileFollowButton.removeEventListener('click', unfollow);
             profileFollowButton.addEventListener('click', follow);
         });
