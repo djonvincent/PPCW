@@ -21,9 +21,6 @@ ul.photos {
     padding: 0;
 }
 
-ul.photos .username {
-}
-
 .photo {
 	position: relative;
 	background-color: #999;
@@ -142,6 +139,15 @@ img.avatar {
 #uploadLoadingScreen .spinner-border {
     height: 20vw;
     width: 20vw;
+}
+
+#profilePhotos {
+    column-count: 2;
+    column-gap: 5px;
+}
+
+#profilePhotos .photo {
+    margin-bottom: 5px;
 }
 
 @media screen and (max-height: 600px) {

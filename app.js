@@ -73,11 +73,13 @@ Photo.create(
     '/images/bb58.jpg'
 );
 
-Photo.create(
-    'watchcollector',
-    'Omega Seamaster',
-    '/images/smp.jpg'
-);
+setTimeout(() => {
+    Photo.create(
+        'watchcollector',
+        'Omega Seamaster',
+        '/images/smp.jpg'
+    );
+}, 10);
 
 server.listen(port);
 

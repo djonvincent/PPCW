@@ -3,7 +3,12 @@ let uploadDescription = document.getElementById('uploadDescription');
 let uploadButton = document.getElementById('uploadButton');
 let uploadPreview = document.getElementById('uploadPreview');
 let uploadForm = document.getElementById('uploadForm');
+let uploadChooseFileButton = document.getElementById('uploadChooseFileButton');
 let uploadLoadingScreen = document.getElementById('uploadLoadingScreen');
+
+uploadChooseFileButton.addEventListener('click', () => {
+    uploadFile.click();
+});
 
 uploadFile.addEventListener('change', () => {
 	if (!uploadFile.files) {
@@ -42,13 +47,12 @@ uploadForm.addEventListener('submit', e => {
         uploadDescription.value = '';
         uploadPreview.style.backgroundImage = '';
         uploadLoadingScreen.className = 'success';
-    })
-    .catch(err => {
-        alert('Error uploading photo');
-    })
-    .finally(() => {
         setTimeout(() => {
             uploadLoadingScreen.className = '';
         }, 1000);
-    });
+    })
+    .catch(err => {
+        alert('Error uploading photo');
+        uploadLoadingScreen.className = '';
+    })
 });

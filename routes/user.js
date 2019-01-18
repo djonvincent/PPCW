@@ -17,6 +17,7 @@ router.get('/', (req, res) => {
 
 router.get('/me', auth, (req, res) => {
     let photos = Photo.getAllByUser(req.user.username);
+    photos.sort((a,b) => b.date - a.date);
     let expand;
     if (req.query.expand) {
         expand = req.query.expand.split(',');
@@ -37,6 +38,7 @@ router.get('/:username', (req, res) => {
         return res.status(400).send({'error':'User not found'});
     }
     let photos = Photo.getAllByUser(req.params.username);
+    photos.sort((a,b) => b.date - a.date);
     let expand;
     if (req.query.expand) {
         expand = req.query.expand.split(',');

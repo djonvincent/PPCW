@@ -84,11 +84,9 @@
                 <div class="form-group">
                     <textarea id="uploadDescription" class="form-control" rows="3" placeholder="Description"></textarea>
                 </div>
-                <div class="btn btn-primary btn-lg">
-                    <label for="uploadFile">
+                <div id="uploadChooseFileButton" class="btn btn-primary btn-lg">
                         <span class="oi oi-image"></span>
                         Choose
-                    </label>
                 </div>
                 <button class="btn btn-success btn-lg" type="submit">
                     <span class="oi oi-data-transfer-upload"></span>
@@ -104,7 +102,7 @@
             <h1 id="profileUsername"></h1>
             <p id="profileName"></p>
             <button class="btn btn-primary" id="profileFollowButton"></button>
-            <ul id="profilePhotos" class="photos"></ul>
+            <div id="profilePhotos" class="photos"></div>
         </div>
     </div>
     <script src="/js/index.js"></script>

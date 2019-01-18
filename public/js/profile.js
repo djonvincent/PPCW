@@ -38,19 +38,28 @@ function profileHandler(params) {
             profileUsername.innerHTML = data.username;
             profileName.innerHTML = data.forename + ' ' + data.surname;
             profilePhotos.innerHTML = '';
-            for(let i=0; i<data.photos.length; i++) {
-                let li = document.createElement('li');
-                let title = document.createElement('p');
-                title.innerHTML = data.photos[i].description;
-                let img = document.createElement('img');
-                img.className = 'photo';
-                img.src = data.photos[i].path;
-                li.appendChild(title);
-                li.appendChild(img);
-                profilePhotos.appendChild(li);
-            };
+            for (let even=0; even < 2; even ++) {
+                data.photos.filter((el, i) => {
+                    return i%2 === even;
+                }).map(data => {
+                    photo = createPhotoEl(data);
+                    profilePhotos.appendChild(photo);
+                });
+            }
         });
     };
+
+    function createPhotoEl (data) {
+        let photo = document.createElement('div');
+        photo.className = 'photo loading';
+        let img = document.createElement('img');
+        img.addEventListener('load', () => {
+            photo.classList.remove('loading');
+        });
+        img.src = data.path;
+        photo.appendChild(img);
+        return photo;
+    }
 
     function follow () {
         let apiKey = localStorage.getItem('apiKey');
