@@ -71,6 +71,11 @@ img.avatar {
     color: rgb(0,0,0,0.9);
 }
 
+#uploadForm {
+    width: 80%;
+    margin: 0 auto;
+}
+
 #uploadPreview {
 	position: relative;
 	width: 100%;
@@ -153,6 +158,11 @@ img.avatar {
 	#mobileNav {
 		visibility: visible;
 	}
+
+    #uploadForm {
+        width: 100%;
+        margin: 0;
+    }
 
 	body {
 		padding-top: 0;
