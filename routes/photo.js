@@ -9,7 +9,6 @@ const uploadPath = 'public/photos';
 const upload = multer({dest: uploadPath + '/'});
 
 const schema = {
-    title: Joi.string().max(50),
     description: Joi.string().max(200).allow('')
 };
 
@@ -30,6 +29,16 @@ router.post('/', auth, upload.single('photo'), (req, res) => {
     );
     res.send(photo);
 });
+
+router.put('/:id', auth, (req, res) => {
+    let result = Joi.validate(req.body, schema);
+    if (result.error) {
+        return res.status(400).send({'error': result.error.details[0].message});
+    }
+    let photo = Photo.get(Number(req.params.id));
+    photo.description = req.body.description;
+    res.send(photo);
+}); 
 
 router.get('/:id', auth, (req, res) => {
     let photo = Photo.get(Number(req.params.id));
