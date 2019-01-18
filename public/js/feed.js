@@ -87,8 +87,7 @@ function updateFeed () {
             desc.innerHTML = data[i].description;
             let dateField = document.createElement('p');
             let date = new Date(data[i].date);
-            let dateString = date.toLocaleDateString() + ' ' + date.toLocaleTimeString();
-            dateField.innerHTML = dateString;
+            dateField.innerHTML = timeDeltaFormat(date);
 			let photo = document.createElement('div');
 			photo.className = 'photo';
             photo.style.paddingTop = (100*data[i].height/data[i].width) + '%';
