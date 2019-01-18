@@ -1,13 +1,17 @@
+const imageSize = require('image-size');
 const photos =[];
 let lastPhotoId = 0;
 
-exports.create = (username, description, path) => {
+exports.create = (username, description, path, publicPath) => {
+    let dimensions = imageSize(path);
     let photo = {
         id: lastPhotoId,
         user: username,
         description: description,
         date: Date.now(),
-        path: path
+        path: publicPath,
+        width: dimensions.width,
+        height: dimensions.height
     };
     lastPhotoId ++;
     photos.push(photo);

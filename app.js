@@ -70,6 +70,7 @@ User.create(
 Photo.create(
     'watchcollector',
     'Black Bay Fifty-Eight',
+    'public/images/bb58.jpg',
     '/images/bb58.jpg'
 );
 
@@ -77,6 +78,7 @@ setTimeout(() => {
     Photo.create(
         'watchcollector',
         'Omega Seamaster',
+        'public/images/smp.jpg',
         '/images/smp.jpg'
     );
 }, 10);

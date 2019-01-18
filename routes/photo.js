@@ -21,8 +21,13 @@ router.post('/', auth, upload.single('photo'), (req, res) => {
     if (!req.file) {
         return res.status(400).send({'error': 'Photo required'});
     }
-    let path = '/photos/' + req.file.filename;
-    let photo = Photo.create(req.user.username, req.body.description, path);
+    let publicPath = '/photos/' + req.file.filename;
+    let photo = Photo.create(
+        req.user.username,
+        req.body.description,
+        req.file.path,
+        publicPath
+    );
     res.send(photo);
 });
 
