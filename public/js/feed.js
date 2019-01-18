@@ -75,29 +75,36 @@ function updateFeed () {
         feed.innerHTML = '';
         for(let i=0; i<data.length; i++) {
             let li = document.createElement('li');
+            let card = document.createElement('div');
+            card.className = 'card mb-4';
             let avatar = document.createElement('img');
             avatar.className = 'rounded-circle avatar';
             avatar.src = '/images/avatar.png';
             let title = document.createElement('a');
             title.href = '/profile/' + data[i].user;
-            title.className = "username route";
+            title.className = "username route m-1";
             title.appendChild(avatar);
             title.innerHTML += data[i].user;
-            let desc = document.createElement('p');
-            desc.innerHTML = data[i].description;
-            let dateField = document.createElement('p');
-            let date = new Date(data[i].date);
-            dateField.innerHTML = timeDeltaFormat(date);
 			let photo = document.createElement('div');
 			photo.className = 'photo';
             photo.style.paddingTop = (100*data[i].height/data[i].width) + '%';
             let img = document.createElement('img');
             img.src = data[i].path;
 			photo.appendChild(img);
+            let body = document.createElement('div');
+            body.className = 'card-body';
+            let desc = document.createElement('p');
+            desc.className = 'card-text';
+            desc.innerHTML = data[i].description;
+            let date = document.createElement('p');
+            date.className = 'card-text text-muted';
+            date.innerHTML = timeDeltaFormat(new Date(data[i].date));
+            body.appendChild(desc);
+            body.appendChild(date)
+            card.appendChild(photo);
+            card.appendChild(body)
             li.appendChild(title);
-            li.appendChild(photo);
-            li.appendChild(dateField)
-            li.appendChild(desc);
+            li.appendChild(card);
             feed.appendChild(li);
         };
     });
