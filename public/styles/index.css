@@ -26,18 +26,10 @@ ul.photos {
 	background-color: #999;
 	text-align: center;
 	width: 100%;
+    display: inline-block;
 }
 
 .photo img {
-	max-width: 100%;
-	max-height: 80vh;
-}
-
-.photo.loading {
-	padding-top: 100%;
-}
-
-.photo.loading img {
 	width: 100%;
 	position: absolute;
 	top: 0;
@@ -67,6 +59,7 @@ img.avatar {
 
 #mobileNav {
     justify-content: space-evenly;
+	visibility: hidden;
 }
 
 #mobileNav .nav-item a {
@@ -76,10 +69,6 @@ img.avatar {
 
 #mobileNav .nav-item.active a {
     color: rgb(0,0,0,0.9);
-}
-
-#mobileNav {
-	visibility: hidden;
 }
 
 #uploadPreview {
@@ -144,10 +133,6 @@ img.avatar {
 #profilePhotos {
     column-count: 2;
     column-gap: 5px;
-}
-
-#profilePhotos .photo {
-    margin-bottom: 5px;
 }
 
 @media screen and (max-height: 600px) {

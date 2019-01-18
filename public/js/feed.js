@@ -90,11 +90,9 @@ function updateFeed () {
             let dateString = date.toLocaleDateString() + ' ' + date.toLocaleTimeString();
             dateField.innerHTML = dateString;
 			let photo = document.createElement('div');
-			photo.className = 'photo loading';
+			photo.className = 'photo';
+            photo.style.paddingTop = (100*data[i].height/data[i].width) + '%';
             let img = document.createElement('img');
-			img.addEventListener('load', () => {
-				photo.classList.remove('loading');
-			});
             img.src = data[i].path;
 			photo.appendChild(img);
             li.appendChild(title);

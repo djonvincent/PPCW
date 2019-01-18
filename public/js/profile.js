@@ -51,11 +51,9 @@ function profileHandler(params) {
 
     function createPhotoEl (data) {
         let photo = document.createElement('div');
-        photo.className = 'photo loading';
+        photo.style.paddingTop = (100*data.height/data.width) + '%';
+        photo.className = 'photo';
         let img = document.createElement('img');
-        img.addEventListener('load', () => {
-            photo.classList.remove('loading');
-        });
         img.src = data.path;
         photo.appendChild(img);
         return photo;
