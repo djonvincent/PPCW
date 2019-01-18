@@ -43,7 +43,7 @@ app.get('/api/feed', auth, (req, res) => {
     res.send(photos);
 });
 
-app.get(['/', '/login', '/upload', '/profile/:username'], (req, res) => {
+app.get(['/', '/login', '/upload', '/profile/:username', '/photo/:id'], (req, res) => {
     res.sendFile(path.join(__dirname, '/public/index.html'));
 });
 
