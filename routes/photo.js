@@ -9,7 +9,7 @@ const uploadPath = 'public/photos';
 const upload = multer({dest: uploadPath + '/'});
 
 const schema = {
-    description: Joi.string().max(200).allow('')
+    description: Joi.string().max(200).allow('').required()
 };
 
 router.post('/', auth, upload.single('photo'), (req, res) => {
@@ -48,10 +48,19 @@ router.get('/:id', auth, (req, res) => {
     if (photo.user !== req.user.username) {
         return res.status(401).send({'error': 'You do not have permission to view this photo'});
     }
+    res.send(photo);
+});
+
+router.delete('/:id', auth, (req, res) => {
+    let photo = Photo.get(Number(req.params.id));
     if (!photo) {
         return res.status(400).send({'error': 'Photo not found'});
     }
-    res.send(photo);
+    if (photo.user !== req.user.username) {
+        return res.status(401).send({'error': 'You do not have permission to view this photo'});
+    }
+    Photo.delete(photo.id);
+    res.send({'status': 'deleted'});
 });
 
 module.exports = router;

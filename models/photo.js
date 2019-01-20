@@ -18,13 +18,24 @@ exports.create = (username, description, path, publicPath) => {
     return photo;
 };
 
-exports.get = (id) => {
+exports.get = id => {
     for (let photo of photos) {
         if (photo.id === id) {
             return photo;
         }
     }
     return null;
+};
+
+exports.delete = id => {
+    for (let i=0; i<photos.length; i++) {
+        if (photos[i].id === id) {
+            photos.splice(i,1);
+            console.log(photos);
+            return true;
+        }
+    }
+    return false;
 };
 
 exports.getAllByUser = (username) => {
