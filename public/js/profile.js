@@ -37,10 +37,21 @@ function profileHandler(params) {
         .then(data => {
             profileUsername.innerHTML = data.username;
             profileName.innerHTML = data.forename + ' ' + data.surname;
-            profilePhotos.innerHTML = '';
             // Initialise photo columns and heights
             let columns = [[],[]];
             let heights = [0,0];
+            /*
+            for (let i=0; i < data.photos.length; i++) {
+                let photo = data.photos[i]
+                let height = photo.height/photo.width;
+                if (heights[0] <= heights[1]) {
+                    columns[0].push(photo);
+                    heights[0] += height;
+                } else {
+                    columns[1].push(data.photos[i]);
+                    heights[1] += height;
+                }
+            }*/
             // Fill photos with empty spaces to make multiple of 3
             while (data.photos.length % 3 !== 0) {
                 data.photos.push({height: 0, width: 1});
@@ -95,20 +106,20 @@ function profileHandler(params) {
                         heights[1-j] -= diff;
                     }
                 }
-                profilePhotos.innerHTML = '';
-                
-                // Add columns to the DOM
-                columns.forEach(col => {
-                    let div = document.createElement('div');
-                    col.forEach(photo => {
-                        // Skip gaps
-                        if (photo.path) {
-                            div.appendChild(createPhotoEl(photo));
-                        }
-                    });
-                    profilePhotos.appendChild(div);
-                });
             }
+            profilePhotos.innerHTML = '';
+
+            // Add columns to the DOM
+            columns.forEach(col => {
+                let div = document.createElement('div');
+                col.forEach(photo => {
+                    // Skip gaps
+                    if (photo.path) {
+                        div.appendChild(createPhotoEl(photo));
+                    }
+                });
+                profilePhotos.appendChild(div);
+            });
         });
     };
 
