@@ -124,14 +124,18 @@ function profileHandler(params) {
     };
 
     function createPhotoEl (data) {
+        let a = document.createElement('a');
+        a.href = '/photo/' + data.id;
+        a.className = 'route';
         let photo = document.createElement('div');
         photo.style.paddingTop = (100*data.height/data.width) + '%';
         photo.className = 'photo';
         let img = document.createElement('img');
         img.src = data.path;
         photo.appendChild(img);
+        a.appendChild(photo);
         //photo.innerHTML = data.id;
-        return photo;
+        return a;
     }
 
     function follow () {

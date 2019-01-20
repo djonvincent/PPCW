@@ -46,13 +46,10 @@ uploadForm.addEventListener('submit', e => {
         uploadFile.value = '';
         uploadDescription.value = '';
         uploadPreview.style.backgroundImage = '';
-        uploadLoadingScreen.className = 'success';
-        setTimeout(() => {
-            uploadLoadingScreen.className = '';
-        }, 1000);
+        uploadLoadingScreen.className = '';
+        navigate('/profile/me');
     })
     .catch(err => {
         alert('Error uploading photo');
-        uploadLoadingScreen.className = '';
     })
 });

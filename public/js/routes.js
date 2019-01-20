@@ -26,11 +26,6 @@ document.addEventListener('click', e  => {
     if (el) {
         e.preventDefault();
         navigate(el.pathname);
-		window.history.pushState(
-			{},
-			el.pathname,
-			window.location.origin + el.pathname
-		);
     }
 });
 
@@ -39,6 +34,11 @@ window.onpopstate = () => {
 };
 
 function navigate(path) {
+    window.history.pushState(
+        {},
+        path,
+        window.location.origin + path
+    );
 	let m;
 	let route = routes.find(r => {
 		m = path.match(r.re)
