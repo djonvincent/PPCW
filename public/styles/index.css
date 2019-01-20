@@ -140,6 +140,14 @@ img.avatar {
     column-gap: 5px;
 }
 
+#profilePhotos div:nth-child(2) {
+    display: inline-block;
+}
+
+#profilePhotos div {
+    width: 100%;
+}
+
 @media screen and (max-height: 600px) {
 	#container {
 		max-width: 400px;
