@@ -2,6 +2,7 @@ let photoImage = document.getElementById('photoImage');
 let photoDate = document.getElementById('photoDate');
 let photoDescription = document.getElementById('photoDescription');
 let photoEditButton = document.getElementById('photoEditButton');
+let photoDeleteButton = document.getElementById('photoDeleteButton');
 let photoSavedChanges = document.getElementById('photoSavedChanges');
 let originalDescription;
 
@@ -16,8 +17,16 @@ photoDescription.addEventListener('input', e => {
 });
 
 function photoHandler(params) {
+    photoImage.src = '';
+    photoDate.innerHTML = '';
+    photoDescription.value = '';
+    photoSavedChanges.style.display = 'none';
+    photoEditButton.style.display = 'none';
+    photoDeleteButton.style.display = 'none';
+    photoDescription.readOnly = true;
     let photoId = params.id
     let apiKey = localStorage.getItem('apiKey');
+    let username = localStorage.getItem('username');
     if (!photoId) {
         return;
     }
@@ -79,7 +88,13 @@ function photoHandler(params) {
             ${date.toLocaleTimeString().substring(0,5)}
         `;
         photoDescription.value = data.description;
-        originalDescription = data.description;
+        if (data.user === username) {
+            photoDescription.readOnly = false;
+            photoEditButton.style.display = '';
+            photoDeleteButton.style.display = '';
+            photoSavedChanges.style.display = '';
+            originalDescription = data.description;
+        }
     })
     .catch(err => {
         alert(err);
