@@ -5,6 +5,10 @@ let profileFollowButton = document.getElementById('profileFollowButton');
 
 function profileHandler(params) {
     loadProfile();
+    profileUsername.innerHTML = '';
+    profileName.innerHTML = '';
+    profilePhotos.innerHTML = '';
+    profileFollowButton.style.display = 'none';
 
     function loadProfile() {
         let apiKey = localStorage.getItem('apiKey');
@@ -13,14 +17,17 @@ function profileHandler(params) {
             method: 'get',
             headers: new Headers({'Authorization': apiKey})
         })
-        .then(res => res.json())
+        .then(res => {
+            if (!res.ok) {
+                throw Error(res.statusText);
+            }
+            return res.json();
+        })
         .then(data => {
             if (data.username === username || username === 'me') {
-                profileFollowButton.hidden = true;
                 return;
-            } else {
-                profileFollowButton.hidden = false;
             }
+            profileFollowButton.style.display = '';
             if (data.follows.indexOf(username) === -1) {
                 profileFollowButton.innerHTML = 'Follow';
                 profileFollowButton.addEventListener('click', follow);
@@ -28,7 +35,9 @@ function profileHandler(params) {
                 profileFollowButton.innerHTML = 'Unfollow';
                 profileFollowButton.addEventListener('click', unfollow);
             }
-        });
+        })
+        .catch(err => {});
+
         fetch('/api/people/' + username + '?expand=photos', {
             method: 'get',
             headers: new Headers({'Authorization': apiKey})
