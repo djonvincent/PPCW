@@ -2,7 +2,6 @@ let feed = document.getElementById('feed');
 let feedRefreshButton = document.getElementById('feedRefreshButton');
 let lastRefreshTime;
 
-updateFeed();
 feedRefreshButton.addEventListener('click', updateFeed);
 
 const ptr = PullToRefresh.init({
@@ -65,13 +64,22 @@ const ptr = PullToRefresh.init({
 });
 
 function updateFeed () {
+    if (lastRefreshTime && Date.now() - lastRefreshTime < 60*1000) {
+        return;
+    }
     let apiKey = localStorage.getItem('apiKey');
     fetch('/api/feed', {
         method: 'get',
         headers: new Headers({'Authorization': apiKey})
     })
-    .then(res => res.json())
+    .then(res => {
+        if (!res.ok) {
+            throw Error(res.statusText);
+        }
+        return res.json();
+    })
     .then(data => {
+        lastRefreshTime = Date.now()
         feed.innerHTML = '';
         for(let i=0; i<data.length; i++) {
             let li = document.createElement('li');
