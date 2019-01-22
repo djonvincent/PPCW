@@ -34,10 +34,6 @@ div.jumbotron span.logo {
     margin-right: 10px;
 }
 
-input {
-    background-image: none !important;
-}
-
 @media screen and (max-width: 600px) {
     div.container {
         width: 100%;
