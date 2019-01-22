@@ -19,9 +19,10 @@ loginForm.addEventListener('submit', e => {
         return res.json();
     })
     .then(data => {
-        loginUsername.innerHTML = '';
-        loginPassword.innerHTML = '';
+        loginUsername.value = '';
+        loginPassword.value = '';
         localStorage.setItem('apiKey', data.key);
+        localStorage.setItem('username', data.username); 
         navigate('/');
         updateFeed();
     })

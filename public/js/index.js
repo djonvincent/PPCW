@@ -45,6 +45,6 @@ function updateSearchResults () {
 
 logoutButton.addEventListener('click', () => {
     localStorage.removeItem('apiKey');
+    localStorage.removeItem('username');
     navigate('/login');
-    updateFeed();
 });

@@ -27,7 +27,7 @@
                 <a class="nav-link route" href="/profile/me">My Profile</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#" id="logoutButton">Logout</a>
+                <a class="nav-link" id="logoutButton">Logout</a>
             </li>
         </ul>
         <form class="form-inline my-0">
@@ -60,7 +60,7 @@
     <div id="results" class="rounded border float-right mr-3" style="display: none;">
     </div>
     <div id="container">
-        <div class="page" data-route="/">
+        <div class="page" data-route="/" data-handler="updateFeed">
             <button class="btn d-none" type="button" id="feedRefreshButton">
                 <span class="oi oi-reload"></span>
             </button>
