@@ -2,6 +2,7 @@ let loginUsername = document.getElementById('loginUsername');
 let loginPassword = document.getElementById('loginPassword');
 let loginButton = document.getElementById('loginButton');
 let loginForm = document.getElementById('loginForm');
+let errorMessage = document.getElementById('errorMessage');
 let backgroundIndex = 0;
 let backgrounds = [
     '/images/background1.jpg',
@@ -30,7 +31,13 @@ function advanceBackground() {
 }
 
 loginForm.addEventListener('submit', e => {
+    loginForm.classList.remove('was-validated');
+    errorMessage.style.display = 'none';
     e.preventDefault();
+    if (!loginForm.checkValidity()) {
+        loginForm.classList.add('was-validated');
+        return;
+    }
     let username = loginUsername.value;
     let password = loginPassword.value;
     fetch('/api/login', {
@@ -51,6 +58,6 @@ loginForm.addEventListener('submit', e => {
         window.location.pathname = '/';
     })
     .catch(err => {
-        alert('Invalid credentials');
+        errorMessage.style.display = '';
     });
 });

@@ -28,10 +28,14 @@ div.jumbotron {
     opacity: 0.9;
 }
 
-div.jumbotron span {
+div.jumbotron span.logo {
     float: left;
     font-size: 5.4rem;
     margin-right: 10px;
+}
+
+input {
+    background-image: none !important;
 }
 
 @media screen and (max-width: 600px) {

@@ -14,7 +14,7 @@
     <body>
         <div class="container">
             <div class="jumbotron">
-                <span class="oi oi-book"></span>
+                <span class="logo oi oi-book"></span>
                 <h1>Welcome to Photobook</h1>
                 <p class="lead">
                     Upload and share photos with your friends.
@@ -37,15 +37,28 @@
                     <button class="btn btn-lg btn-primary" id="loginButton" type="submit">Login</button>
                 </form>
                 -->
-                <form id="loginForm">
+                <form id="loginForm" class="needs-validation" novalidate>
                     <div class="input-group input-group-lg mb-3">
                         <input id="loginUsername" class="form-control"
                         type="text" autocapitalize="none"
-                        placeholder="Username">
+                        placeholder="Username" required>
+                        <div class="invalid-feedback">
+                            <span class="oi oi-warning"></span>
+                            Enter your username
+                        </div>
                     </div>
                     <div class="input-group input-group-lg mb-3">
                         <input id="loginPassword" class="form-control"
-                        type="password" placeholder="Password">
+                        type="password" placeholder="Password" required>
+                        <div class="invalid-feedback">
+                            <span class="oi oi-warning"></span>
+                            Enter your password
+                        </div>
+                    </div>
+                    <div id="errorMessage" class="alert alert-danger"
+                    style="display: none;">
+                        <span class="oi oi-warning"></span>
+                        Invalid username and/or password
                     </div>
                     <button class="btn btn-lg btn-primary" id="loginButton" type="submit">Login</button>
                 </form>
