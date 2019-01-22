@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Photobook</title>
+        <link href="/favicon.png" rel="shortcut icon">
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+        <link rel="stylesheet" href="/open-iconic/font/css/open-iconic-bootstrap.min.css">
+        <link rel="stylesheet" href="/styles/login.css">
+		<link rel="manifest" href="/manifest.json">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<meta name="HandheldFriendly" content="true">
+    </head>
+    <body>
+        <div class="container">
+            <div class="jumbotron">
+                <span class="oi oi-book"></span>
+                <h1>Welcome to Photobook</h1>
+                <p class="lead">
+                    Upload and share photos with your friends.
+                </p>
+                <hr>
+                <!--
+                <form id="loginForm">
+                    <div class="input-group input-group-lg mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Username</span>
+                        </div>
+                        <input id="loginUsername" class="form-control" type="text" autocapitalize="none">
+                    </div>
+                    <div class="input-group input-group-lg mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Password</span>
+                        </div>
+                        <input id="loginPassword" class="form-control" type="password">
+                    </div>
+                    <button class="btn btn-lg btn-primary" id="loginButton" type="submit">Login</button>
+                </form>
+                -->
+                <form id="loginForm">
+                    <div class="input-group input-group-lg mb-3">
+                        <input id="loginUsername" class="form-control"
+                        type="text" autocapitalize="none"
+                        placeholder="Username">
+                    </div>
+                    <div class="input-group input-group-lg mb-3">
+                        <input id="loginPassword" class="form-control"
+                        type="password" placeholder="Password">
+                    </div>
+                    <button class="btn btn-lg btn-primary" id="loginButton" type="submit">Login</button>
+                </form>
+            </div>
+        </div>
+        <script src="/js/login.js"></script>
+    </body>
+</html>

@@ -43,8 +43,12 @@ app.get('/api/feed', auth, (req, res) => {
     res.send(photos);
 });
 
-app.get(['/', '/login', '/upload', '/profile/:username', '/photo/:id'], (req, res) => {
+app.get(['/', '/upload', '/profile/:username', '/photo/:id'], (req, res) => {
     res.sendFile(path.join(__dirname, '/public/index.html'));
+});
+
+app.get('/login', (req, res) => {
+    res.sendFile(path.join(__dirname, '/public/login.html'));
 });
 
 if (!fs.existsSync('public/photos')) {
@@ -60,18 +64,26 @@ let delia = User.create(
 delia.apiKey = 'concertina';
 delia.follows.push('watchcollector');
 
-User.create(
+dion = User.create(
     'watchcollector',
     'password',
     'Dion',
     'HS'
 );
+dion.follows.push('doctorwhocomposer');
 
 Photo.create(
     'watchcollector',
     'Black Bay Fifty-Eight',
     'public/images/bb58.jpg',
     '/images/bb58.jpg'
+);
+
+Photo.create(
+    'doctorwhocomposer',
+    'Me',
+    'public/images/delia-derbyshire.jpg',
+    '/images/delia-derbyshire.jpg'
 );
 
 setTimeout(() => {

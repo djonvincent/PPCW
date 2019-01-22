@@ -2,6 +2,33 @@ let loginUsername = document.getElementById('loginUsername');
 let loginPassword = document.getElementById('loginPassword');
 let loginButton = document.getElementById('loginButton');
 let loginForm = document.getElementById('loginForm');
+let backgroundIndex = 0;
+let backgrounds = [
+    '/images/background1.jpg',
+    '/images/background2.jpg',
+    '/images/background3.jpg',
+    '/images/background4.jpg',
+    '/images/background5.jpg'
+]
+
+for (let path of backgrounds.slice(1)) {
+    let img = document.createElement('img');
+    img.src = path;
+}
+
+setTimeout(() => {
+    advanceBackground();
+    setInterval(advanceBackground, 8000);
+}, 5000);
+
+function advanceBackground() {
+    backgroundIndex ++;
+    if (backgroundIndex >= backgrounds.length) {
+        backgroundIndex = 0;
+    }
+    document.body.style.backgroundImage = `url('${backgrounds[backgroundIndex]}')`;
+}
+
 loginForm.addEventListener('submit', e => {
     e.preventDefault();
     let username = loginUsername.value;
@@ -19,12 +46,9 @@ loginForm.addEventListener('submit', e => {
         return res.json();
     })
     .then(data => {
-        loginUsername.value = '';
-        loginPassword.value = '';
         localStorage.setItem('apiKey', data.key);
         localStorage.setItem('username', data.username); 
-        navigate('/');
-        updateFeed();
+        window.location.pathname = '/';
     })
     .catch(err => {
         alert('Invalid credentials');

@@ -1,0 +1,41 @@
+#loginForm {
+    max-width: 350px;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    background: url('/images/background1.jpg');
+    background-position: center;
+    background-size: cover;
+    transition: background-image 3s ease-in;
+}
+
+div.container {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    width: 80%;
+    max-width: 800px;
+}
+
+div.jumbotron {
+    width: 100%;
+    opacity: 0.9;
+}
+
+div.jumbotron span {
+    float: left;
+    font-size: 5.4rem;
+    margin-right: 10px;
+}
+
+@media screen and (max-width: 600px) {
+    div.container {
+        width: 100%;
+    }
+}
