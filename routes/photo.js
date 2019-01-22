@@ -40,13 +40,10 @@ router.put('/:id', auth, (req, res) => {
     res.send(photo);
 }); 
 
-router.get('/:id', auth, (req, res) => {
+router.get('/:id', (req, res) => {
     let photo = Photo.get(Number(req.params.id));
     if (!photo) {
         return res.status(400).send({'error': 'Photo not found'});
-    }
-    if (photo.user !== req.user.username) {
-        return res.status(401).send({'error': 'You do not have permission to view this photo'});
     }
     res.send(photo);
 });
@@ -57,7 +54,7 @@ router.delete('/:id', auth, (req, res) => {
         return res.status(400).send({'error': 'Photo not found'});
     }
     if (photo.user !== req.user.username) {
-        return res.status(401).send({'error': 'You do not have permission to view this photo'});
+        return res.status(401).send({'error': 'You do not have permission to edit this photo'});
     }
     Photo.delete(photo.id);
     res.send({'status': 'deleted'});

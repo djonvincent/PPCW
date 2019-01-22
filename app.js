@@ -34,7 +34,7 @@ app.get('/api/login', (req, res) => {
     if (!apiKey) {
         return res.status(401).send({'error': 'Username/password not found'});
     }
-    res.send({'key': apiKey});
+    res.send({key: apiKey, username: username});
 });
 
 app.get('/api/feed', auth, (req, res) => {
