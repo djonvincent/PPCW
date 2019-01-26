@@ -1,7 +1,6 @@
 User = require('../models/user');
 
 module.exports.system = (req, res, next) => {
-    console.log(req.body);
     if (req.body.access_token === 'concertina') {
         next();
     } else {

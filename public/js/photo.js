@@ -32,7 +32,7 @@ function photoHandler(params) {
     }
     photoEditForm.onsubmit = e => {
         e.preventDefault();
-        fetch('/api/photo/' + photoId, {
+        fetch('/photo/' + photoId, {
             method: 'put',
             headers: new Headers({
                 'Authorization': apiKey,
@@ -57,7 +57,7 @@ function photoHandler(params) {
     };
 
     photoDeleteButton.onclick = e => {
-        fetch('/api/photo/' + photoId, {
+        fetch('/photo/' + photoId, {
             method: 'delete',
             headers: new Headers({'Authorization': apiKey})
         })
@@ -70,7 +70,7 @@ function photoHandler(params) {
         });
     };
             
-    fetch('/api/photo/' + photoId, {
+    fetch('/photo/' + photoId, {
         method: 'get',
         headers: new Headers({'Authorization': apiKey})
     })

@@ -40,7 +40,7 @@ loginForm.addEventListener('submit', e => {
     }
     let username = loginUsername.value;
     let password = loginPassword.value;
-    fetch('/api/login', {
+    fetch('/login', {
         method: 'get',
         headers: new Headers({
             'Authorization': 'Basic ' + btoa(username + ':' + password)
@@ -55,7 +55,7 @@ loginForm.addEventListener('submit', e => {
     .then(data => {
         localStorage.setItem('apiKey', data.key);
         localStorage.setItem('username', data.username); 
-        window.location.pathname = '/';
+        window.location.pathname = 'app/';
     })
     .catch(err => {
         errorMessage.style.display = '';

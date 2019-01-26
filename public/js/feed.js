@@ -69,7 +69,7 @@ function feedHandler () {
 
 function updateFeed () {
     let apiKey = localStorage.getItem('apiKey');
-    fetch('/api/feed', {
+    fetch('/feed', {
         method: 'get',
         headers: new Headers({'Authorization': apiKey})
     })

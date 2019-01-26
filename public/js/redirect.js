@@ -1,4 +1,8 @@
 (() => {
+if (!localStorage.getItem('username')) {
+    window.location.pathname = '/app/login';
+    return;
+}
 let apiKey = localStorage.getItem('apiKey');
 fetch('/people/me', {
     method: 'get',
@@ -6,7 +10,7 @@ fetch('/people/me', {
 })
 .then(res => {
     if (!res.ok) {
-        window.location.pathname = '/login.html';
+        window.location.pathname = '/app/login';
     }
 });
 })();

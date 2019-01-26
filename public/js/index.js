@@ -24,7 +24,7 @@
 
     function updateSearchResults () {
         let term = navSearchField.value;
-        fetch('/api/people/search/' + term, {method: 'get'})
+        fetch('/people/search/' + term, {method: 'get'})
         .then(res => res.json())
         .then(data => {
             navSearchSpinner.style.display = 'none';
@@ -47,6 +47,6 @@
     logoutButton.addEventListener('click', () => {
         localStorage.removeItem('apiKey');
         localStorage.removeItem('username');
-        window.location.pathname = '/login';
+        window.location.pathname = '/app/login';
     });
 })();

@@ -16,7 +16,7 @@ document.querySelectorAll('div.page').forEach(el => {
     });
 });  
 
-navigate(window.location.pathname);
+loadPage(window.location.pathname);
 
 document.addEventListener('click', e => {
     let el = e.target;
@@ -25,20 +25,37 @@ document.addEventListener('click', e => {
     }
     if (el) {
         e.preventDefault();
+        console.log(el.pathname);
         navigate(el.pathname);
     }
 });
 
 window.onpopstate = () => {
-    navigate(window.location.pathname);
+    loadPage(window.location.pathname);
 };
 
+function stripAppPrefix(path) {
+    if (path.substring(0, 4) === '/app') {
+        path = path.substring(4);
+    }
+    if (path === '') {
+        path = '/';
+    }
+    return path;
+}
+
 function navigate(path) {
+    path = stripAppPrefix(path);
     window.history.pushState(
         {},
-        path,
-        window.location.origin + path
+        '/app' + path,
+        window.location.origin + '/app' + path
     );
+    loadPage(path);
+}
+
+function loadPage (path) {
+    path = stripAppPrefix(path);
 	let m;
 	let route = routes.find(r => {
 		m = path.match(r.re)
@@ -51,11 +68,7 @@ function navigate(path) {
 	for (let i=0; i<route.params.length; i++) {
 		params[route.params[i]] = m[i+1];
 	}
-    loadPage(route, params);
 	changeActiveNavItem(path);
-}
-
-function loadPage (route, params) {
 	if (route.handler) {
 		route.handler(params);
 	}

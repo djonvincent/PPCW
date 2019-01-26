@@ -22,6 +22,12 @@ function checkDeliaDerbyshire(res)
     }
 }
 
+// thanks to Nico Tejera at https://stackoverflow.com/questions/1714786/query-string-encoding-of-a-javascript-object
+// returns something like "access_token=concertina&username=bobthebuilder"
+function serialise(obj){
+    return Object.keys(obj).map(k => `${encodeURIComponent(k)}=${encodeURIComponent(obj[k])}`).join('&');
+}
+
 describe('Test the people service', () => {
     test('GET /people succeeds', () => {
         return request(app)
@@ -63,26 +69,18 @@ describe('Test the people service', () => {
     test('POST /people needs access_token', () => {
         return request(app)
 	    .post('/people')
-	    .send({
-            'username': 'bobthebuilder',
-	        'forename': 'Bob',
-	        'surname': 'Builder'
-        })
 	    .expect(403);
     });
 
     test('POST /people cannot replicate', () => {
+	const params = {access_token: 'concertina',
+			username: 'doctorwhocomposer',
+			forename: 'Bob',
+			surname: 'Builder'};
         return request(app)
 	    .post('/people')
-	    .send({
-            'access_token': 'concertina',
-	        'username': 'doctorwhocomposer',
-	        'forename': 'Bob',
-	        'surname': 'Builder'
-        })
+	    .send(params)
 	    .expect(400);
     });
 
 });
-
-app.close();

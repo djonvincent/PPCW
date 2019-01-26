@@ -2,6 +2,7 @@
 <html lang="en">
     <head>
         <title>Photobook</title>
+        <script src="/js/redirect.js"></script>
         <link href="/favicon.png" rel="shortcut icon">
         <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
         <link rel="stylesheet" href="/open-iconic/font/css/open-iconic-bootstrap.min.css">
@@ -58,7 +59,7 @@
     </ul>
     <div id="container">
         <div class="page" data-route="/" data-handler="feedHandler">
-            <button class="btn d-none" type="button" id="feedRefreshButton">
+            <button class="btn float-right" type="button" id="feedRefreshButton">
                 <span class="oi oi-reload"></span>
             </button>
             <ul id="feed" class="photos"></ul>

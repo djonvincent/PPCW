@@ -65,6 +65,7 @@ router.get('/:username/photos', auth, (req, res) => {
 });
 
 router.post('/', Auth.system, (req, res) => {
+    console.log(req.body);
     let result = Joi.validate(req.body, schema);
     if (result.error) {
         return res.status(400).send({'error': result.error.details[0].message});

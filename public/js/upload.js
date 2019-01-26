@@ -52,7 +52,7 @@ uploadForm.addEventListener('submit', e => {
     fd.append('description', uploadDescription.value);
     uploadLoadingScreen.classList.add('loading');
     uploadFieldset.disabled = true;
-    fetch('/api/photo', {
+    fetch('/photo', {
         method: 'post',
         headers: new Headers({'Authorization': apiKey}),
         body: fd

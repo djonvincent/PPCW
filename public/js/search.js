@@ -17,7 +17,7 @@
 
     function updateSearchResults () {
         let term = searchField.value;
-        fetch('/api/people/search/' + term, {method: 'get'})
+        fetch('/people/search/' + term, {method: 'get'})
         .then(res => res.json())
         .then(data => {
             searchSpinner.style.display = 'none';

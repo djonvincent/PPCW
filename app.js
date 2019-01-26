@@ -6,19 +6,30 @@ const User = require('./models/user');
 const Photo = require('./models/photo');
 const auth = require('./middlewares/auth').auth;
 const app = express();
-const server = require('http').createServer(app);
-const port = 3000;
 const uploadPath = 'public/photos';
 const upload = multer({dest: uploadPath + '/'});
 const path = require('path');
 
 app.use(express.json());
-app.use(express.static('public'));
-app.use('/api/people', require('./routes/user'));
-app.use('/api/photo', require('./routes/photo'));
-app.use('/api/follow', require('./routes/follow'));
+app.use('/people', require('./routes/user'));
+app.use('/photo', require('./routes/photo'));
+app.use('/follow', require('./routes/follow'));
 
-app.get('/api/login', (req, res) => {
+app.get('/app/login', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public/login.html'));
+});
+
+app.get('/app/*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public/index.html'));
+});
+
+app.get(['/', '/app'], (req, res) => {
+    res.redirect('/app/');
+});
+
+app.use(express.static('public'));
+
+app.get('/login', (req, res) => {
     if (!req.headers.authorization) {
         return res.status(401).send();
     }
@@ -37,18 +48,10 @@ app.get('/api/login', (req, res) => {
     res.send({key: apiKey, username: username});
 });
 
-app.get('/api/feed', auth, (req, res) => {
+app.get('/feed', auth, (req, res) => {
     let dateFrom = req.query.dateFrom || 0;
     let photos = Photo.getFeed(req.user.follows, dateFrom);
     res.send(photos);
-});
-
-app.get(['/', '/upload', '/profile/:username', '/photo/:id', '/search'], (req, res) => {
-    res.sendFile(path.join(__dirname, '/public/index.html'));
-});
-
-app.get('/login', (req, res) => {
-    res.sendFile(path.join(__dirname, '/public/login.html'));
 });
 
 if (!fs.existsSync('public/photos')) {
@@ -95,6 +98,4 @@ setTimeout(() => {
     );
 }, 10);
 
-server.listen(port);
-
-module.exports = server;
+module.exports = app;
