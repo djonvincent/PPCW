@@ -3,6 +3,7 @@ let loginPassword = document.getElementById('loginPassword');
 let loginButton = document.getElementById('loginButton');
 let loginForm = document.getElementById('loginForm');
 let errorMessage = document.getElementById('errorMessage');
+/*
 let backgroundIndex = 0;
 let backgrounds = [
     '/images/background1.jpg',
@@ -29,6 +30,7 @@ function advanceBackground() {
     }
     document.body.style.backgroundImage = `url('${backgrounds[backgroundIndex]}')`;
 }
+*/
 
 loginForm.addEventListener('submit', e => {
     loginForm.classList.remove('was-validated');
