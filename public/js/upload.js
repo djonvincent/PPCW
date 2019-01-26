@@ -25,7 +25,6 @@ uploadFile.addEventListener('change', () => {
         'png',
         'bmp',
         'gif',
-        'svg'
     ];
     if (dotIndex === -1 || validExtensions.indexOf(extension) === -1) {
         alert('Invalid image file format');
