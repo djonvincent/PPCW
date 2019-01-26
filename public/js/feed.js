@@ -15,7 +15,7 @@ const ptr = PullToRefresh.init({
     getMarkup () {
         return `
 			<span id="ptrArrow" class="oi oi-arrow-bottom"></span>
-        	<div id="ptrSpinner" class="spinner-border"></div>
+        	<div id="ptrSpinner" class="spinner-border large-spinner"></div>
         `;
     },
     getStyles () {
@@ -34,11 +34,9 @@ const ptr = PullToRefresh.init({
             }
 			#ptrSpinner {
 				display: none;
-				height: 3rem;
-				width: 3rem;
 			}
 			.__PREFIX__refresh #ptrSpinner {
-				display: inherit;
+				display: block;
 			}
 			#ptrArrow {
 				transition: transform .3s;
@@ -63,10 +61,13 @@ const ptr = PullToRefresh.init({
     }
 });
 
-function updateFeed () {
-    if (lastRefreshTime && Date.now() - lastRefreshTime < 60*1000) {
-        return;
+function feedHandler () {
+    if (lastRefreshTime && Date.now() - lastRefreshTime >= 60*1000) {
+        updateFeed();
     }
+}
+
+function updateFeed () {
     let apiKey = localStorage.getItem('apiKey');
     fetch('/api/feed', {
         method: 'get',

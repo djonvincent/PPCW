@@ -30,11 +30,12 @@ function profileHandler(params) {
             profileFollowButton.style.display = '';
             if (data.follows.indexOf(username) === -1) {
                 profileFollowButton.innerHTML = 'Follow';
-                profileFollowButton.addEventListener('click', follow);
+                profileFollowButton.onclick = follow;
             } else {
                 profileFollowButton.innerHTML = 'Unfollow';
-                profileFollowButton.addEventListener('click', unfollow);
+                profileFollowButton.onclick = unfollow;
             }
+            
         })
         .catch(err => {});
 
@@ -158,8 +159,7 @@ function profileHandler(params) {
                 return;
             }
             profileFollowButton.innerHTML = 'Unfollow';
-            profileFollowButton.removeEventListener('click', follow);
-            profileFollowButton.addEventListener('click', unfollow);
+            profileFollowButton.onclick = unfollow;
         });
     }
 
@@ -174,8 +174,7 @@ function profileHandler(params) {
                 return;
             }
             profileFollowButton.innerHTML = 'Follow';
-            profileFollowButton.removeEventListener('click', unfollow);
-            profileFollowButton.addEventListener('click', follow);
+            profileFollowButton.onclick = follow;
         });
     }
 }

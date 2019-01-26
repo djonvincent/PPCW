@@ -1,5 +1,17 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
 body {
     padding-top: 60px;
+}
+
+div.large-spinner {
+    width: 3rem;
+    height: 3rem;
+    font-size: 0.5rem;
+    display: block;
 }
 
 div.page {
@@ -23,6 +35,10 @@ a.username {
 ul.photos {
     list-style-type: none;
     padding: 0;
+}
+
+#feed {
+    min-height: 50vh;
 }
 
 .photo {
@@ -52,13 +68,17 @@ img.avatar {
     margin: 0 auto;
 }
 
-#results {
+#navSearchResults {
     width: 227px;
     padding: .375rem .75rem;
 }
 
-#resultsSpinner {
+#navSearchSpinner {
     margin-left: -1.6rem;
+}
+
+#searchSpinner {
+    margin: 2rem auto;
 }
 
 #mobileNav {
@@ -112,8 +132,13 @@ img.avatar {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgb(0,0,0,0.4);
+    background: rgb(0,0,0,0.25);
     transition: opacity 0.5s;
+}
+
+#uploadLoadingScreen .spinner-border {
+    width: 6rem;
+    height: 6rem;
 }
 
 #uploadLoadingScreen.loading, #uploadLoadingScreen.success  {
@@ -134,22 +159,9 @@ img.avatar {
     display: none;
 }
 
-#uploadLoadingScreen .spinner-border {
-    height: 20vw;
-    width: 20vw;
-}
-
 #profilePhotos {
     column-count: 2;
-    column-gap: 5px;
-}
-
-#profilePhotos div:nth-child(2) {
-    display: inline-block;
-}
-
-#profilePhotos div {
-    width: 100%;
+    column-gap: 7px;
 }
 
 @media screen and (max-height: 600px) {

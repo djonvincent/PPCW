@@ -31,7 +31,6 @@ exports.delete = id => {
     for (let i=0; i<photos.length; i++) {
         if (photos[i].id === id) {
             photos.splice(i,1);
-            console.log(photos);
             return true;
         }
     }
