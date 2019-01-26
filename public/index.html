@@ -94,16 +94,16 @@
             </div>
         </div>
         <div class="page p-2" data-route="/profile/:username" data-handler="profileHandler">
-            <h1 id="profileUsername"></h1>
+            <h1 id="profileUsername">Loading...</h1>
             <p id="profileName"></p>
             <button type="button" class="btn btn-primary mb-3" id="profileFollowButton"></button>
             <div id="profilePhotos" class="photos"></div>
         </div>
         <div class="page" data-route="/photo/:id" data-handler="photoHandler">
-            <img class="photo" id="photoImage"></img>
+            <img class="photo" id="photoImage" src="about:blank" alt="">
             <p id="photoDate"></p>
             <form id="photoEditForm">
-                <div class=="form-group">
+                <div class="form-group">
                     <textarea class="form-control" id="photoDescription"></textarea>
                 </div>
                 <button id="photoEditButton" type="submit" class="btn btn-primary" disabled>
