@@ -62,7 +62,7 @@ const ptr = PullToRefresh.init({
 });
 
 function feedHandler () {
-    if (lastRefreshTime && Date.now() - lastRefreshTime >= 60*1000) {
+    if (!lastRefreshTime || Date.now() - lastRefreshTime >= 60*1000) {
         updateFeed();
     }
 }
@@ -85,7 +85,7 @@ function updateFeed () {
         for(let i=0; i<data.length; i++) {
             let li = document.createElement('li');
             let card = document.createElement('div');
-            card.className = 'card mb-4';
+            card.className = 'card mb-2 border-0';
             let avatar = document.createElement('img');
             avatar.className = 'rounded-circle avatar';
             avatar.src = '/images/avatar.png';
@@ -103,7 +103,7 @@ function updateFeed () {
             let body = document.createElement('div');
             body.className = 'card-body';
             let desc = document.createElement('p');
-            desc.className = 'card-text';
+            desc.className = 'card-text mb-1';
             desc.innerHTML = data[i].description;
             let date = document.createElement('p');
             date.className = 'card-text text-muted';
