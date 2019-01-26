@@ -6,6 +6,7 @@ let uploadForm = document.getElementById('uploadForm');
 let uploadFieldSet = document.getElementById('uploadFieldset');
 let uploadChooseFileButton = document.getElementById('uploadChooseFileButton');
 let uploadLoadingScreen = document.getElementById('uploadLoadingScreen');
+let uploadFileObject;
 
 uploadChooseFileButton.addEventListener('click', () => {
     uploadFile.click();
@@ -15,21 +16,40 @@ uploadFile.addEventListener('change', () => {
 	if (!uploadFile.files) {
 		return;
 	}
+    let filename = uploadFile.files[0].name;
+    let dotIndex = filename.indexOf('.');
+    let extension = filename.substring(dotIndex+1).toLowerCase();
+    let validExtensions = [
+        'jpg',
+        'jpeg',
+        'png',
+        'bmp',
+        'gif',
+        'svg'
+    ];
+    if (dotIndex === -1 || validExtensions.indexOf(extension) === -1) {
+        alert('Invalid image file format');
+        return;
+    }
+
     let reader = new FileReader();
     reader.addEventListener('load', e => {
         uploadPreview.style.backgroundImage = `url(${e.target.result})`;
     });
     reader.readAsDataURL(uploadFile.files[0]);
+    uploadFileObject = uploadFile.files[0];
+    uploadButton.disabled = false;
+
 });
 
 uploadForm.addEventListener('submit', e => {
     e.preventDefault();
     let apiKey = localStorage.getItem('apiKey');
-    if (uploadFile.files.length !== 1) {
+    if (!uploadFileObject) {
         return;
     }
     let fd = new FormData();
-    fd.append('photo', uploadFile.files[0]);
+    fd.append('photo', uploadFileObject);
     fd.append('description', uploadDescription.value);
     uploadLoadingScreen.classList.add('loading');
     uploadFieldset.disabled = true;

@@ -21,13 +21,17 @@ router.post('/', auth, upload.single('photo'), (req, res) => {
         return res.status(400).send({'error': 'Photo required'});
     }
     let publicPath = '/photos/' + req.file.filename;
-    let photo = Photo.create(
-        req.user.username,
-        req.body.description,
-        req.file.path,
-        publicPath
-    );
-    res.send(photo);
+    try {
+        let photo = Photo.create(
+            req.user.username,
+            req.body.description,
+            req.file.path,
+            publicPath
+        );
+        res.send(photo);
+    } catch (err) {
+        res.status(400).send({'error': 'Invalid image file'});
+    }
 });
 
 router.put('/:id', auth, (req, res) => {
