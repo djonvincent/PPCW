@@ -35,7 +35,7 @@ router.get('/me', auth, (req, res) => {
 router.get('/:username', (req, res) => {
     let user = User.get(req.params.username);
     if (!user) {
-        return res.status(400).send({'error':'User not found'});
+        return res.status(404).send({'error':'User not found'});
     }
     let photos = Photo.getAllByUser(req.params.username);
     photos.sort((a,b) => b.date - a.date);
@@ -56,7 +56,7 @@ router.get('/:username', (req, res) => {
 router.get('/:username/photos', auth, (req, res) => {
     let user = User.get(req.params.username);
     if (!user) {
-        return res.status(400).send({'error': 'User not found'});
+        return res.status(404).send({'error': 'User not found'});
     }
     if ([...req.user.follows, req.user.username].indexOf(req.params.username) === -1) {
         return res.status(401).send({'error': 'You do not permission to view this'});

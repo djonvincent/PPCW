@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.post('/:username', auth, (req, res) => {
     if (!User.get(req.params.username)) {
-        return res.status(400).send({'error': 'Specified user does not exist'});
+        return res.status(404).send({'error': 'Specified user does not exist'});
     }
     if (req.params.username === req.user.username) {
         return res.status(400).send({'error': 'You cannot follow yourself'});
@@ -19,7 +19,7 @@ router.post('/:username', auth, (req, res) => {
 
 router.delete('/:username', auth, (req, res) => {
     if (!User.get(req.params.username)) {
-        return res.status(400).send({'error': 'Specified user does not exist'});
+        return res.status(404).send({'error': 'Specified user does not exist'});
     }
     let i = req.user.follows.indexOf(req.params.username);
     if (i == -1) {

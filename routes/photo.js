@@ -40,6 +40,9 @@ router.put('/:id', auth, (req, res) => {
         return res.status(400).send({'error': result.error.details[0].message});
     }
     let photo = Photo.get(Number(req.params.id));
+    if (!photo) {
+        return res.status(404).send({'error': 'Photo not found'});
+    }
     photo.description = req.body.description;
     res.send(photo);
 }); 
@@ -47,7 +50,7 @@ router.put('/:id', auth, (req, res) => {
 router.get('/:id', (req, res) => {
     let photo = Photo.get(Number(req.params.id));
     if (!photo) {
-        return res.status(400).send({'error': 'Photo not found'});
+        return res.status(404).send({'error': 'Photo not found'});
     }
     res.send(photo);
 });
@@ -55,7 +58,7 @@ router.get('/:id', (req, res) => {
 router.delete('/:id', auth, (req, res) => {
     let photo = Photo.get(Number(req.params.id));
     if (!photo) {
-        return res.status(400).send({'error': 'Photo not found'});
+        return res.status(404).send({'error': 'Photo not found'});
     }
     if (photo.user !== req.user.username) {
         return res.status(401).send({'error': 'You do not have permission to edit this photo'});
