@@ -99,6 +99,7 @@ function updateFeed () {
             photo.style.paddingTop = (100*data[i].height/data[i].width) + '%';
             let img = document.createElement('img');
             img.src = data[i].path;
+            img.alt = '';
 			photo.appendChild(img);
             let body = document.createElement('div');
             body.className = 'card-body';

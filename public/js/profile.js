@@ -142,6 +142,7 @@ function profileHandler(params) {
         photo.className = 'photo';
         let img = document.createElement('img');
         img.src = data.path;
+        img.alt = '';
         photo.appendChild(img);
         a.appendChild(photo);
         //photo.innerHTML = data.id;
