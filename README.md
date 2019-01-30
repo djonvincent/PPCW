@@ -46,3 +46,4 @@ key in the body with value `concertina`.
 ## Attribution
 - Icons from (Open Iconic)[https://useiconic.com/open/]
 - Background photo taken by (Bruno Glaetsch)[https://www.pexels.com/@bru-no]
+- Avatar placeholder image by (Stephanie Edwards)[https://pixabay.com/en/users/wanderercreative-855399]

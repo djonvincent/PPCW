@@ -96,7 +96,6 @@ router.delete('/:username', Auth.system, (req, res) => {
 });
 
 router.get('/search/:term', (req, res) => {
-    console.log(req.params.term);
     let limit = 10;
     if (req.query.limit) {
         let customLimit = parseInt(req.query.limit);

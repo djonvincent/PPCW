@@ -25,7 +25,6 @@ document.addEventListener('click', e => {
     }
     if (el) {
         e.preventDefault();
-        console.log(el.pathname);
         navigate(el.pathname);
     }
 });

@@ -58,44 +58,18 @@ if (!fs.existsSync('public/photos')) {
     fs.mkdirSync('public/photos');
 }
 
-let delia = User.create(
+User.create(
     'doctorwhocomposer',
     'password',
     'Delia',
     'Derbyshire'
 )
-delia.apiKey = 'concertina';
-delia.follows.push('watchcollector');
 
-dion = User.create(
+User.create(
     'watchcollector',
     'password',
     'Dion',
     'HS'
 );
-dion.follows.push('doctorwhocomposer');
-
-Photo.create(
-    'watchcollector',
-    'Black Bay Fifty-Eight',
-    'public/images/bb58.jpg',
-    '/images/bb58.jpg'
-);
-
-Photo.create(
-    'doctorwhocomposer',
-    'Me',
-    'public/images/delia-derbyshire.jpg',
-    '/images/delia-derbyshire.jpg'
-);
-
-setTimeout(() => {
-    Photo.create(
-        'watchcollector',
-        'Omega Seamaster',
-        'public/images/smp.jpg',
-        '/images/smp.jpg'
-    );
-}, 10);
 
 module.exports = app;
