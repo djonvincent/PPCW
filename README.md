@@ -7,7 +7,7 @@
 
 ## Cloud deployment
 The app has been deployed on Heroku and is accessible at
-[https://fast-everglades-33452.herokuapp.com]
+https://fast-everglades-33452.herokuapp.com/
 
 ## API
 ### Authentication
