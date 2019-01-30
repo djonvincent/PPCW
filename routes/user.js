@@ -7,6 +7,8 @@ const auth = Auth.auth;
 const router = express.Router();
 
 const schema = {
+    forename: Joi.string(),
+    surname: Joi.string(),
     username: Joi.string().alphanum().min(3).max(30).required(),
     password: Joi.string().min(6).max(30).required()
 }
@@ -53,20 +55,21 @@ router.get('/:username', (req, res) => {
     });
 });
 
-router.get('/:username/photos', auth, (req, res) => {
-    let user = User.get(req.params.username);
-    if (!user) {
-        return res.status(404).send({'error': 'User not found'});
-    }
-    if ([...req.user.follows, req.user.username].indexOf(req.params.username) === -1) {
-        return res.status(401).send({'error': 'You do not permission to view this'});
-    }
-    res.send(Photo.getAllByUser(user.username));
+router.put('/me', auth, (req, res) => {
+    req.user.forename = req.body.forename;
+    req.user.surname = req.body.surname;
+    let photos = Photo.getAllByUser(req.user.username);
+    photos.sort((a,b) => b.date - a.date);
+    let {passwordHash, apiKey, ...rest} = req.user
+    res.send({
+        ...rest,
+        photos: photos
+    });
 });
 
 router.post('/', Auth.system, (req, res) => {
-    console.log(req.body);
-    let result = Joi.validate(req.body, schema);
+    let {access_token, ...data} = req.body;
+    let result = Joi.validate(data, schema);
     if (result.error) {
         return res.status(400).send({'error': result.error.details[0].message});
     }
@@ -79,7 +82,16 @@ router.post('/', Auth.system, (req, res) => {
     }
 });
 
+router.delete('/:username', Auth.system, (req, res) => {
+    let del = User.delete(req.params.username);
+    if (!del) {
+        return res.status(404).send({error: 'User not found'});
+    }
+    res.send({status: 'deleted'});
+});
+
 router.get('/search/:term', (req, res) => {
+    console.log(req.params.term);
     let limit = 10;
     if (req.query.limit) {
         let customLimit = parseInt(req.query.limit);

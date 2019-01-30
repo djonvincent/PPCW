@@ -31,6 +31,16 @@ exports.create = (username, password, forename, surname) => {
     return user;
 }
 
+exports.delete = username => {
+    for (let i=0; i<users.length; i++) {
+        if (users[i].username === username) {
+            users.splice(i,1);
+            return true;
+        }
+    }
+    return false;
+};
+
 exports.get = username => {
     for (let user of users) {
         if (user.username === username) {
