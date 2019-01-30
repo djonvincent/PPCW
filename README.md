@@ -6,7 +6,8 @@
 4. There will be a default user `doctorwhocomposer` with password `password`
 
 ## Cloud deployment
-
+The app has been deployed on Heroku and is accessible at
+[https://fast-everglades-33452.herokuapp.com]
 
 ## API
 ### Authentication
