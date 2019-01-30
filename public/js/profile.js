@@ -69,7 +69,10 @@ function profileHandler(params) {
             // Process photos in groups of 3
             for (let i=0; i<data.photos.length; i+=3) {
                 let photos = data.photos.slice(i, i+3);
-                photos = photos.map(p => ({relHeight: (p.height/p.width), ...p}));
+                photos = photos.map(p => {
+                    p.relHeight = p.height/p.width;
+                    return p;
+                });
                 let sorted = photos.slice().sort((a,b) => a.relHeight - b.relHeight);
                 // Returns height of an array of photos
                 function height (group) {
