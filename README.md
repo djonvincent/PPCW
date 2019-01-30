@@ -42,3 +42,7 @@ key in the body with value `concertina`.
 
 - GET /login
 - GET /feed (authenticated)
+
+## Attribution
+- Icons from (Open Iconic)[https://useiconic.com/open/]
+- Background photo taken by (Bruno Glaetsch)[https://www.pexels.com/@bru-no]

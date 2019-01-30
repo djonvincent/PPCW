@@ -7,7 +7,7 @@ html, body {
 }
 
 body {
-    background: url('/images/background1.jpg');
+    background: url('/images/background.jpg');
     background-position: center;
     background-size: cover;
     transition: background-image 3s ease-in;
@@ -32,6 +32,12 @@ div.jumbotron span.logo {
     float: left;
     font-size: 5.4rem;
     margin-right: 10px;
+}
+
+span.photo-credit {
+    position: absolute;
+    bottom: 0;
+    right: 0;
 }
 
 @media screen and (max-width: 600px) {

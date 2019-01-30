@@ -3,34 +3,6 @@ let loginPassword = document.getElementById('loginPassword');
 let loginButton = document.getElementById('loginButton');
 let loginForm = document.getElementById('loginForm');
 let errorMessage = document.getElementById('errorMessage');
-/*
-let backgroundIndex = 0;
-let backgrounds = [
-    '/images/background1.jpg',
-    '/images/background2.jpg',
-    '/images/background3.jpg',
-    '/images/background4.jpg',
-    '/images/background5.jpg'
-]
-
-for (let path of backgrounds.slice(1)) {
-    let img = document.createElement('img');
-    img.src = path;
-}
-
-setTimeout(() => {
-    advanceBackground();
-    setInterval(advanceBackground, 8000);
-}, 5000);
-
-function advanceBackground() {
-    backgroundIndex ++;
-    if (backgroundIndex >= backgrounds.length) {
-        backgroundIndex = 0;
-    }
-    document.body.style.backgroundImage = `url('${backgrounds[backgroundIndex]}')`;
-}
-*/
 
 loginForm.addEventListener('submit', e => {
     loginForm.classList.remove('was-validated');
