@@ -3,6 +3,7 @@
     let navSearchResults = document.getElementById('navSearchResults');
     let navSearchSpinner = document.getElementById('navSearchSpinner');
     let logoutButton = document.getElementById('logoutButton');
+    let logoutButtonMobile = document.getElementById('logoutButtonMobile');
     let inDebounce;
 
     navSearchField.addEventListener('input', () => {
@@ -44,9 +45,11 @@
         });
     };
 
-    logoutButton.addEventListener('click', () => {
+    logoutButton.addEventListener('click', logout);
+    logoutButtonMobile.addEventListener('click', logout);
+    function logout() {
         localStorage.removeItem('apiKey');
         localStorage.removeItem('username');
         window.location.pathname = '/app/login';
-    });
+    }
 })();
