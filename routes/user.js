@@ -74,7 +74,12 @@ router.post('/', Auth.system, (req, res) => {
         return res.status(400).send({'error': result.error.details[0].message});
     }
     try {
-        let user = User.create(req.body.username, req.body.password);
+        let user = User.create(
+            req.body.username,
+            req.body.password,
+            req.body.forename || '',
+            req.body.surname || ''
+        );
         let {passwordHash, apiKey, ...rest} = user;
         res.send(rest);
     } catch (err) {
