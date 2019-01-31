@@ -14,10 +14,10 @@ let originalDescription;
 photoDescription.addEventListener('input', e => {
     if (photoDescription.value !== originalDescription) {
         photoEditButton.disabled = false;
-        photoSavedChanges.style.display = 'none';
+        photoSavedChanges.style.visibility = 'hidden';
     } else {
         photoEditButton.disabled = true;
-        photoSavedChanges.style.display = '';
+        photoSavedChanges.style.visibility = 'visible';
     }
 });
 
@@ -57,7 +57,7 @@ window.photoHandler = params => {
             photoDescription.value = data.description;
             originalDescription = data.description;
             photoEditButton.disabled = true;
-            photoSavedChanges.style.display = '';
+            photoSavedChanges.style.visibility = 'visible';
         });
     };
 
@@ -104,7 +104,7 @@ window.photoHandler = params => {
             photoLikeButton.classList.add('clicked');
             setTimeout(() => {
                 photoLikeButton.classList.remove('clicked');
-            }, 10);
+            }, 50);
             updateLikeStatus(data.id, !liked)
             .then(data => {
                 let likes = data.likes.length;

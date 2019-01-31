@@ -4,6 +4,10 @@ let feedSpinner = document.getElementById('feedSpinner');
 let lastRefreshTime;
 
 feedRefreshButton.addEventListener('click', updateFeed);
+// Hide refresh button on touchscreen devices
+if ('ontouchstart' in window) {
+    feedRefreshButton.style.display = 'none';
+}
 
 const ptr = PullToRefresh.init({
     triggerElement: '#feed',
@@ -87,6 +91,12 @@ function updateFeed () {
         lastRefreshTime = Date.now()
         feed.innerHTML = '';
         feedSpinner.style.display = 'none';
+        if (data.length === 0) {
+            let li = document.createElement('li');
+            li.className = 'text-center mt-5';
+            li.innerHTML = 'Your feed is empty, follow somebody!';
+            feed.appendChild(li);
+        }
         for(let i=0; i<data.length; i++) {
 
             let li = document.createElement('li');
@@ -134,7 +144,7 @@ function updateFeed () {
                 likeBtn.classList.add('clicked');
                 setTimeout(() => {
                     likeBtn.classList.remove('clicked');
-                }, 10);
+                }, 50);
                 updateLikeStatus(data[i].id, !liked)
                 .then(data => {
                     let likes = data.likes.length;

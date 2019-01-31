@@ -39,11 +39,19 @@ button.like {
     float: right;
     outline: none;
     transition: font-size 0.15s ease-out;
+    -webkit-transition: font-size 0.15s ease-out;
+    -moz-transition: font-size 0.15s ease-out;
+    -ms-transition: font-size 0.15s ease-out;
+    -o-transition: font-size 0.15s ease-out;
 }
 
 button.like.clicked {
     font-size: 0rem;
     transition: font-size 0s;
+    -webkit-transition: font-size 0s;
+    -moz-transition: font-size 0s;
+    -ms-transition: font-size 0s;
+    -o-transition: font-size 0s;
 }
 
 button.like span {
@@ -178,6 +186,10 @@ img.avatar {
     justify-content: center;
     background: rgb(0,0,0,0.25);
     transition: opacity 0.5s;
+    -webkit-transition: opacity 0.5s;
+    -moz-transition: opacity 0.5s;
+    -ms-transition: opacity 0.5s;
+    -o-transition: opacity 0.5s;
 }
 
 #uploadLoadingScreen .spinner-border {
@@ -217,10 +229,6 @@ img.avatar {
 @media screen and (max-width: 600px) {
     #container {
         width: 100%;
-    }
-
-    #feedRefreshButton {
-        display: none;
     }
 
     #feedSpinner {
