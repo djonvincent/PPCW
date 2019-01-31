@@ -1,3 +1,4 @@
+(() => {
 let photoImage = document.getElementById('photoImage');
 let photoPhoto = document.getElementById('photoPhoto');
 let photoLikeButton = document.getElementById('photoLikeButton');
@@ -20,7 +21,7 @@ photoDescription.addEventListener('input', e => {
     }
 });
 
-function photoHandler(params) {
+window.photoHandler = params => {
     photoImage.src = '';
     photoDate.innerHTML = '';
     photoDescription.value = '';
@@ -104,8 +105,8 @@ function photoHandler(params) {
             .then(data => {
                 let likes = data.likes.length;
                 photoLikeText.innerHTML = likes + ' like' + (likes === 1 ? '' : 's');
-                liked = !liked;
             });
+            liked = !liked;
         });
         let date = new Date(data.date);
         photoDate.innerHTML = `
@@ -126,4 +127,5 @@ function photoHandler(params) {
     .catch(err => {
         alert(err);
     });
-}
+};
+})();

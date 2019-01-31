@@ -131,8 +131,8 @@ function updateFeed () {
                 .then(data => {
                     let likes = data.likes.length;
                     likeText.innerHTML = likes + ' like' + (likes === 1 ? '' : 's');
-                    liked = !liked;
                 });
+                liked = !liked;
             });
             let heart = document.createElement('span');
             heart.className = 'oi oi-heart';
