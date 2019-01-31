@@ -101,6 +101,10 @@ window.photoHandler = params => {
             } else {
                 photoLikeButton.classList.add('liked');
             }
+            photoLikeButton.classList.add('clicked');
+            setTimeout(() => {
+                photoLikeButton.classList.remove('clicked');
+            }, 10);
             updateLikeStatus(data.id, !liked)
             .then(data => {
                 let likes = data.likes.length;

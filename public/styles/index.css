@@ -12,6 +12,7 @@ div.large-spinner {
     height: 3rem;
     font-size: 0.5rem;
     display: block;
+    margin: 2rem auto;
 }
 
 div.page {
@@ -37,6 +38,17 @@ button.like {
     height: 1.5rem;
     float: right;
     outline: none;
+    transition: font-size 0.15s ease-out;
+}
+
+button.like.clicked {
+    font-size: 0rem;
+    transition: font-size 0s;
+}
+
+button.like span {
+    width: 1.5rem;
+    line-height: 1.5rem;
 }
 
 button.like.liked span {
@@ -62,6 +74,11 @@ ul.photos {
 
 #feed {
     min-height: 50vh;
+}
+
+#feedRefreshButton {
+    display: block;
+    margin: 0 0 0 auto;
 }
 
 div.card-body {
@@ -106,10 +123,6 @@ img.avatar {
 
 #navSearchSpinner {
     margin-left: -1.6rem;
-}
-
-#searchSpinner {
-    margin: 2rem auto;
 }
 
 #mobileNav {
@@ -208,6 +221,10 @@ img.avatar {
 
     #feedRefreshButton {
         display: none;
+    }
+
+    #feedSpinner {
+        display: none !important;
     }
     
 	#desktopNav {

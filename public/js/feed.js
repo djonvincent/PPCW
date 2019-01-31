@@ -1,5 +1,6 @@
 let feed = document.getElementById('feed');
 let feedRefreshButton = document.getElementById('feedRefreshButton');
+let feedSpinner = document.getElementById('feedSpinner');
 let lastRefreshTime;
 
 feedRefreshButton.addEventListener('click', updateFeed);
@@ -62,9 +63,11 @@ const ptr = PullToRefresh.init({
 });
 
 function feedHandler () {
+    updateFeed();
+    /*
     if (!lastRefreshTime || Date.now() - lastRefreshTime >= 60*1000) {
         updateFeed();
-    }
+    }*/
 }
 
 function updateFeed () {
@@ -83,6 +86,7 @@ function updateFeed () {
     .then(data => {
         lastRefreshTime = Date.now()
         feed.innerHTML = '';
+        feedSpinner.style.display = 'none';
         for(let i=0; i<data.length; i++) {
 
             let li = document.createElement('li');
@@ -127,6 +131,10 @@ function updateFeed () {
                 } else {
                     likeBtn.classList.add('liked');
                 }
+                likeBtn.classList.add('clicked');
+                setTimeout(() => {
+                    likeBtn.classList.remove('clicked');
+                }, 10);
                 updateLikeStatus(data[i].id, !liked)
                 .then(data => {
                     let likes = data.likes.length;
@@ -154,5 +162,6 @@ function updateFeed () {
             feed.appendChild(li);
         };
     });
+    feedSpinner.style.display = '';
 }
 

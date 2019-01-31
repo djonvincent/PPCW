@@ -64,9 +64,10 @@
     </ul>
     <div id="container">
         <div class="page" data-route="/" data-handler="feedHandler">
-            <button class="btn float-right" type="button" id="feedRefreshButton">
+            <button class="btn" type="button" id="feedRefreshButton">
                 <span class="oi oi-reload"></span>
             </button>
+            <div id="feedSpinner" class="spinner-border large-spinner" style="display: none;"></div>
             <ul id="feed" class="photos"></ul>
         </div>
         <div class="page" data-route="/search">
