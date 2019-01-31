@@ -5,6 +5,9 @@
 3. Access the web app at localhost:3000/app/login
 4. There will be a default user `doctorwhocomposer` with password `password`
 
+## Testing
+1. Run `npm test`
+
 ## Cloud deployment
 The app has been deployed on Heroku and is accessible at
 https://fast-everglades-33452.herokuapp.com/
