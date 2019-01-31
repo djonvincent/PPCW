@@ -46,3 +46,22 @@ function timeDeltaFormat(date) {
     }
     return dateString;
 }
+
+function updateLikeStatus(id, like) {
+    let method = 'post';
+    if (like === false) {
+        method = 'delete';
+    }
+    let apiKey = localStorage.getItem('apiKey');
+    return fetch('/photo/' + id + '/like', {
+        method: method,
+        headers: new Headers({'Authorization': apiKey})
+    })
+    .then(res => {
+        if (!res.ok) {
+            throw Error(res.statusText);
+        }
+        return res.json();
+    })
+}
+

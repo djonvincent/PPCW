@@ -69,6 +69,7 @@ function feedHandler () {
 
 function updateFeed () {
     let apiKey = localStorage.getItem('apiKey');
+    let username = localStorage.getItem('username');
     fetch('/feed', {
         method: 'get',
         headers: new Headers({'Authorization': apiKey})
@@ -83,6 +84,7 @@ function updateFeed () {
         lastRefreshTime = Date.now()
         feed.innerHTML = '';
         for(let i=0; i<data.length; i++) {
+
             let li = document.createElement('li');
             let card = document.createElement('div');
             card.className = 'card mb-2 border-0';
@@ -94,6 +96,9 @@ function updateFeed () {
             title.className = "username route m-1";
             title.appendChild(avatar);
             title.innerHTML += data[i].user;
+            let a = document.createElement('a');
+            a.className = 'route';
+            a.href = '/photo/' + data[i].id;
 			let photo = document.createElement('div');
 			photo.className = 'photo';
             photo.style.paddingTop = (100*data[i].height/data[i].width) + '%';
@@ -101,17 +106,48 @@ function updateFeed () {
             img.src = data[i].path;
             img.alt = '';
 			photo.appendChild(img);
+            a.appendChild(photo);
             let body = document.createElement('div');
             body.className = 'card-body';
+            let likeText = document.createElement('p');
+            likeText.className = 'card-text text-muted float-right m-1 mr-3';
+            let likes = data[i].likes.length;
+            likeText.innerHTML = likes + ' like' + (likes === 1 ? '' : 's');
+            let likeBtn = document.createElement('button');
+            likeBtn.className = 'like';
+            likeBtn.type = 'button';
+            let liked = false;
+            if (data[i].likes.indexOf(username) !== -1) {
+                likeBtn.classList.add('liked');
+                liked = true;
+            }
+            likeBtn.addEventListener('click', e => {
+                if (liked) {
+                    likeBtn.classList.remove('liked');
+                } else {
+                    likeBtn.classList.add('liked');
+                }
+                updateLikeStatus(data[i].id, !liked)
+                .then(data => {
+                    let likes = data.likes.length;
+                    likeText.innerHTML = likes + ' like' + (likes === 1 ? '' : 's');
+                    liked = !liked;
+                });
+            });
+            let heart = document.createElement('span');
+            heart.className = 'oi oi-heart';
+            likeBtn.appendChild(heart);
             let desc = document.createElement('p');
             desc.className = 'card-text mb-1';
             desc.innerHTML = data[i].description;
             let date = document.createElement('p');
             date.className = 'card-text text-muted';
             date.innerHTML = timeDeltaFormat(new Date(data[i].date));
+            body.appendChild(likeBtn);
+            body.append(likeText);
             body.appendChild(desc);
             body.appendChild(date)
-            card.appendChild(photo);
+            card.appendChild(a);
             card.appendChild(body)
             li.appendChild(title);
             li.appendChild(card);
@@ -119,3 +155,4 @@ function updateFeed () {
         };
     });
 }
+

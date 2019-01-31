@@ -1,6 +1,10 @@
 let photoImage = document.getElementById('photoImage');
+let photoPhoto = document.getElementById('photoPhoto');
+let photoLikeButton = document.getElementById('photoLikeButton');
+let photoLikeText = document.getElementById('photoLikeText');
 let photoDate = document.getElementById('photoDate');
 let photoDescription = document.getElementById('photoDescription');
+let photoDescriptionStatic = document.getElementById('photoDescriptionStatic');
 let photoEditButton = document.getElementById('photoEditButton');
 let photoDeleteButton = document.getElementById('photoDeleteButton');
 let photoSavedChanges = document.getElementById('photoSavedChanges');
@@ -23,7 +27,7 @@ function photoHandler(params) {
     photoSavedChanges.style.display = 'none';
     photoEditButton.style.display = 'none';
     photoDeleteButton.style.display = 'none';
-    photoDescription.readOnly = true;
+    photoDescription.style.display = 'none';
     let photoId = params.id
     let apiKey = localStorage.getItem('apiKey');
     let username = localStorage.getItem('username');
@@ -81,15 +85,38 @@ function photoHandler(params) {
         return res.json()
     })
     .then(data => {
+        photoPhoto.style.paddingTop = (100*data.height/data.width) + '%';
         photoImage.src = data.path;
+        let likes = data.likes.length;
+        photoLikeText.innerHTML = likes + ' like' + (likes === 1 ? '' : 's');
+        let liked = false;
+        if (data.likes.indexOf(username) !== -1) {
+            photoLikeButton.classList.add('liked');
+            liked = true;
+        }
+        photoLikeButton.addEventListener('click', e => {
+            if (liked) {
+                photoLikeButton.classList.remove('liked');
+            } else {
+                photoLikeButton.classList.add('liked');
+            }
+            updateLikeStatus(data.id, !liked)
+            .then(data => {
+                let likes = data.likes.length;
+                photoLikeText.innerHTML = likes + ' like' + (likes === 1 ? '' : 's');
+                liked = !liked;
+            });
+        });
         let date = new Date(data.date);
         photoDate.innerHTML = `
             Uploaded on ${date.toLocaleDateString()} at 
             ${date.toLocaleTimeString().substring(0,5)}
         `;
-        photoDescription.value = data.description;
+        photoDescriptionStatic.innerHTML = data.description;
         if (data.user === username) {
-            photoDescription.readOnly = false;
+            photoDescription.value = data.description;
+            photoDescriptionStatic.style.display = 'none';
+            photoDescription.style.display = '';
             photoEditButton.style.display = '';
             photoDeleteButton.style.display = '';
             photoSavedChanges.style.display = '';

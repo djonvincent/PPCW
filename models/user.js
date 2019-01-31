@@ -2,7 +2,7 @@ const bcrypt = require('bcrypt');
 const ss = require('string-similarity');
 const apiKeyChars = "QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm1234567890";
 const apiKeyLength = 32;
-const users = [];
+let users = [];
 
 function generateAPIKey() {
     let key = "";

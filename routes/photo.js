@@ -67,4 +67,29 @@ router.delete('/:id', auth, (req, res) => {
     res.send({'status': 'deleted'});
 });
 
+router.post('/:id/like', auth, (req, res) => {
+    let photo = Photo.get(Number(req.params.id));
+    if (!photo) {
+        return res.status(404).send({'error': 'Photo not found'});
+    }
+    if (photo.likes.indexOf(req.user.username) !== -1) {
+        return res.status(400).send({'error': 'You already like this photo'});
+    }
+    photo.likes.push(req.user.username);
+    res.send(photo);
+});
+
+router.delete('/:id/like', auth, (req, res) => {
+    let photo = Photo.get(Number(req.params.id));
+    if (!photo) {
+        return res.status(404).send({'error': 'Photo not found'});
+    }
+    let i = photo.likes.indexOf(req.user.username);
+    if (i === -1) {
+        return res.status(400).send({'error': 'You do not already like this photo'});
+    }
+    photo.likes.splice(i, 1);
+    res.send(photo);
+});
+
 module.exports = router;

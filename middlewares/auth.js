@@ -12,7 +12,7 @@ module.exports.auth = (req, res, next) => {
     if (!req.headers.authorization) {
         return res.status(401).send({'error': 'No authorization header specified'})
     }
-    const user = User.getUserByApiKey(req.headers.authorization);
+    let user = User.getUserByApiKey(req.headers.authorization);
     if (user) {
         req.user = user;
         next();

@@ -64,6 +64,8 @@ uploadForm.addEventListener('submit', e => {
         return res;
     })
     .then(res => {
+        uploadFileObject = undefined;
+        uploadButton.disabled = true;
         uploadFile.value = '';
         uploadDescription.value = '';
         uploadPreview.style.backgroundImage = '';

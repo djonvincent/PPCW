@@ -1,5 +1,5 @@
 const imageSize = require('image-size');
-const photos =[];
+let photos = [];
 let lastPhotoId = 0;
 
 exports.create = (username, description, path, publicPath) => {
@@ -8,6 +8,7 @@ exports.create = (username, description, path, publicPath) => {
         id: lastPhotoId,
         user: username,
         description: description,
+        likes: [],
         date: Date.now(),
         path: publicPath,
         width: dimensions.width,
@@ -59,4 +60,3 @@ exports.getFeed = (usernames, dateFrom) => {
     feed.sort((a,b) => b.date - a.date);
     return feed;
 };
-
