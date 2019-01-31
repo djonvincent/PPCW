@@ -1,4 +1,5 @@
 (() => {
+let photoCard = document.getElementById('photoCard');
 let photoImage = document.getElementById('photoImage');
 let photoPhoto = document.getElementById('photoPhoto');
 let photoLikeButton = document.getElementById('photoLikeButton');
@@ -29,6 +30,7 @@ window.photoHandler = params => {
     photoEditButton.style.display = 'none';
     photoDeleteButton.style.display = 'none';
     photoDescription.style.display = 'none';
+    photoCard.style.display = 'none';
     let photoId = params.id
     let apiKey = localStorage.getItem('apiKey');
     let username = localStorage.getItem('username');
@@ -127,6 +129,7 @@ window.photoHandler = params => {
             photoSavedChanges.style.visibility = 'visible';
             originalDescription = data.description;
         }
+        photoCard.style.display = '';
     })
     .catch(err => {
         alert(err);
