@@ -35,8 +35,10 @@ key in the body with value `concertina`.
 - GET /photo/
 - GET /photo/:id
 - POST /photo/ (authenticated)
+- POST /photo/:id/like (authenticated)
 - PUT /photo/:id (authenticated)
 - DELETE /photo/:id (authenticated)
+- DELETE /photo/:id/like (authenticated)
 
 
 - POST /follow/:username (authenticated)
