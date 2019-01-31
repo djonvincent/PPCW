@@ -92,6 +92,10 @@ router.delete('/:username', Auth.system, (req, res) => {
     if (!del) {
         return res.status(404).send({error: 'User not found'});
     }
+    let photos = Photo.getAllByUser(req.params.username);
+    photos.forEach(photo => {
+        Photo.delete(photo.id);
+    });
     res.send({status: 'deleted'});
 });
 
