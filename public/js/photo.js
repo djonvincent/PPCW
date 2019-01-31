@@ -31,6 +31,7 @@ window.photoHandler = params => {
     photoDeleteButton.style.display = 'none';
     photoDescription.style.display = 'none';
     photoCard.style.display = 'none';
+    photoLikeButton.classList.remove('liked');
     let photoId = params.id
     let apiKey = localStorage.getItem('apiKey');
     let username = localStorage.getItem('username');
