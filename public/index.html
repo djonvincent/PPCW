@@ -117,22 +117,22 @@
                     <p id="photoDescriptionStatic" class="card-text mb-1"></p>
                     <textarea placeholder="Description" rows="3" class="card-text mb-1 w-100 p-2" id="photoDescription"></textarea>
                     <p id="photoDate" class="card-text text-muted"></p>
+                    <form id="photoEditForm">
+                        <button id="photoEditButton" type="submit" class="btn btn-primary" disabled>
+                            <span class="oi oi-pencil"></span>
+                            Update
+                        </button>
+                        <button id="photoDeleteButton" type="button" class="btn btn-danger">
+                            <span class="oi oi-trash"></span>
+                            Delete
+                        </button>
+                    </form>
+                    <p id="photoSavedChanges" class="mt-2">
+                        <span class="oi oi-check text-success"></span>
+                        All changes saved
+                    </p>
                 </div>
-                <form id="photoEditForm">
-                    <button id="photoEditButton" type="submit" class="btn btn-primary" disabled>
-                        <span class="oi oi-pencil"></span>
-                        Update
-                    </button>
-                    <button id="photoDeleteButton" type="button" class="btn btn-danger">
-                        <span class="oi oi-trash"></span>
-                        Delete
-                    </button>
-                </form>
             </div>
-            <p id="photoSavedChanges" class="mt-2">
-                <span class="oi oi-check text-success"></span>
-                All changes saved
-            </p>
         </div>
     </div>
     <script src="/js/index.js"></script>

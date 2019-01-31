@@ -24,7 +24,7 @@ function photoHandler(params) {
     photoImage.src = '';
     photoDate.innerHTML = '';
     photoDescription.value = '';
-    photoSavedChanges.style.display = 'none';
+    photoSavedChanges.style.visibility = 'hidden';
     photoEditButton.style.display = 'none';
     photoDeleteButton.style.display = 'none';
     photoDescription.style.display = 'none';
@@ -119,7 +119,7 @@ function photoHandler(params) {
             photoDescription.style.display = '';
             photoEditButton.style.display = '';
             photoDeleteButton.style.display = '';
-            photoSavedChanges.style.display = '';
+            photoSavedChanges.style.visibility = 'visible';
             originalDescription = data.description;
         }
     })
