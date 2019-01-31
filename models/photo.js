@@ -19,6 +19,10 @@ exports.create = (username, description, path, publicPath) => {
     return photo;
 };
 
+exports.getAll = () => {
+    return photos;
+};
+
 exports.get = id => {
     for (let photo of photos) {
         if (photo.id === id) {

@@ -47,6 +47,11 @@ router.put('/:id', auth, (req, res) => {
     res.send(photo);
 }); 
 
+router.get('/', (req, res) => {
+    let photos = Photo.getAll();
+    res.send(photos);
+});
+
 router.get('/:id', (req, res) => {
     let photo = Photo.get(Number(req.params.id));
     if (!photo) {
