@@ -3,7 +3,8 @@
 1. Run `npm start` to start the server running at port 3000
 2. Acesss the API at localhost:3000
 3. Access the web app at localhost:3000/app/login
-4. There will be a default user `doctorwhocomposer` with password `password`
+4. There will be default users `doctorwhocomposer` with password `password`
+   and `watchcollector` with password `password`.
 
 ## Testing
 1. Run `npm test`
@@ -11,6 +12,9 @@
 ## Cloud deployment
 The app has been deployed on Heroku and is accessible at
 https://fast-everglades-33452.herokuapp.com/
+
+
+Please allow around 20 seconds for the website to load from a cold start since Heroku will shut the app down after a period of inactivity. After this it should load quickly.
 
 ## API
 ### Authentication
