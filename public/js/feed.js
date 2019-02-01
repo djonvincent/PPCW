@@ -67,11 +67,9 @@ const ptr = PullToRefresh.init({
 });
 
 function feedHandler () {
-    updateFeed();
-    /*
     if (!lastRefreshTime || Date.now() - lastRefreshTime >= 60*1000) {
         updateFeed();
-    }*/
+    }
 }
 
 function updateFeed () {
