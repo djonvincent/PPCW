@@ -114,7 +114,7 @@ window.photoHandler = params => {
                 photoLikeText.innerHTML = likes + ' like' + (likes === 1 ? '' : 's');
             });
             liked = !liked;
-        });
+        };
         let date = new Date(data.date);
         photoDate.innerHTML = `
             Uploaded on ${date.toLocaleDateString()} at 
