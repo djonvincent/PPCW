@@ -98,7 +98,7 @@ window.photoHandler = params => {
             photoLikeButton.classList.add('liked');
             liked = true;
         }
-        photoLikeButton.addEventListener.onclick = () => {
+        photoLikeButton.onclick = () => {
             if (liked) {
                 photoLikeButton.classList.remove('liked');
             } else {
