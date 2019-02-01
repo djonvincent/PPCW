@@ -11,7 +11,7 @@
 
 ## Cloud deployment
 The app has been deployed on Heroku and is accessible at
-https://fast-everglades-33452.herokuapp.com/
+(https://fast-everglades-33452.herokuapp.com/)
 
 
 Please allow around 20 seconds for the website to load from a cold start since Heroku will shut the app down after a period of inactivity. After this it should load quickly.
@@ -53,6 +53,6 @@ key in the body with value `concertina`.
 - GET /feed (authenticated)
 
 ## Attribution
-- Icons from (Open Iconic)[https://useiconic.com/open/]
-- Background photo taken by (Bruno Glaetsch)[https://www.pexels.com/@bru-no]
-- Avatar placeholder image by (Stephanie Edwards)[https://pixabay.com/en/users/wanderercreative-855399]
+- Icons from [Open Iconic](https://useiconic.com/open/)
+- Background photo taken by [Bruno Glaetsch](https://www.pexels.com/@bru-no)
+- Avatar placeholder image by [Stephanie Edwards](https://pixabay.com/en/users/wanderercreative-855399)
