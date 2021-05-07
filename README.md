@@ -1,4 +1,6 @@
 # Photobook
+A web app where users can upload photos, follow other users and like their posts.
+
 ## Running locally
 1. Run `npm start` to start the server running at port 3000
 2. Acesss the API at localhost:3000
